@@ -43,11 +43,11 @@ RUN mkdir -p /var/www && \
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # ADD START SCRIPT, SUPERVISOR CONFIG, NGINX CONFIG AND RUN SCRIPTS.
-ADD config/supervisor/supervisord.conf /etc/supervisord.conf
-ADD config/nginx/nginx.conf /etc/nginx/nginx.conf
-ADD config/nginx/site.conf /etc/nginx/sites-available/default.conf
-ADD config/php/php.ini /etc/php8.2/php.ini
-ADD config/php-fpm/www.conf /etc/php8.2/php-fpm.d/www.conf
+COPY config/supervisor/supervisord.conf /etc/supervisord.conf
+COPY config/nginx/nginx.conf /etc/nginx/nginx.conf
+COPY config/nginx/site.conf /etc/nginx/sites-available/default.conf
+COPY config/php/php.ini /etc/php8.2/php.ini
+COPY config/php-fpm/www.conf /etc/php8.2/php-fpm.d/www.conf
 
 # make the shell script on the root directory executable
 COPY start.sh /usr/local/bin/start.sh
