@@ -6,19 +6,24 @@ FROM nginx:alpine
 # MAINTAINER OF THE PACKAGE.
 LABEL maintainer="Neo Ighodaro <neo@creativitykills.co>"
 
-# INSTALL SOME SYSTEM PACKAGES.
-RUN apk --update --no-cache add ca-certificates \
-    bash \
-    supervisor
-
 # trust this project public key to trust the packages.
 ADD https://dl.bintray.com/php-alpine/key/php-alpine.rsa.pub /etc/apk/keys/php-alpine.rsa.pub
 
 # CONFIGURE ALPINE REPOSITORIES AND PHP BUILD DIR.
 FROM php:8.2-fpm-alpine
 
-# INSTALL PHP AND SOME EXTENSIONS. SEE: https://github.com/codecasts/php-alpine
-RUN apk add --no-cache --update php-fpm \
+# INSTALL SYSTEM PACKAGES PHP AND SOME EXTENSIONS. SEE: https://github.com/codecasts/php-alpine
+RUN apk add --no-cache --update \
+    ca-certificates \
+    bash \
+    supervisor \
+    nginx \
+    curl \
+    git \
+    unzip \
+    zip \
+    nano \
+    php-fpm \
     php-openssl \
     php-pdo \
     php-pdo_mysql \
@@ -63,6 +68,21 @@ WORKDIR /var/www
 
 #GRANT PRIVILEGIES TO www-data user:group to read in /var/www
 RUN chown -R www-data:www-data /var/www
+
+FROM ubuntu:20.04
+
+# Install some system packages
+RUN apt-get update && apt-get install -y \
+    nginx \
+    supervisor \
+    curl \
+    git \
+    unzip \
+    zip \
+    nano \
+    wget \
+    software-properties-common \
+    && apt-get clean
 
 # Start script file
 CMD ["/usr/local/bin/start.sh"]
