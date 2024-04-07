@@ -37,10 +37,7 @@ RUN mkdir -p /var/www && \
     mkdir -p /run/nginx && \
     mkdir -p /var/log/supervisor && \
     mkdir -p /etc/nginx/sites-enabled && \
-    mkdir -p /etc/nginx/sites-available && \
-    rm /etc/nginx/nginx.conf && \
-    rm /etc/php8.2/php-fpm.d/www.conf && \
-    rm /etc/php8.2/php.ini
+    mkdir -p /etc/nginx/sites-available
 
 # INSTALL COMPOSER.
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
