@@ -49,18 +49,18 @@ ADD config/nginx/nginx.conf /etc/nginx/nginx.conf
 ADD config/nginx/site.conf /etc/nginx/sites-available/default.conf
 ADD config/php/php.ini /etc/php8.2/php.ini
 ADD config/php-fpm/www.conf /etc/php8.2/php-fpm.d/www.conf
-RUN chmod 755 /start.sh
+RUN chmod +x start.sh
 
 # EXPOSE PORTS!
 ARG NGINX_HTTP_PORT=80
 ARG NGINX_HTTPS_PORT=443
 EXPOSE ${NGINX_HTTPS_PORT} ${NGINX_HTTP_PORT}
 
-# KICKSTART!
-CMD ["/start.sh"]
-
 # SET THE WORK DIRECTORY.
 WORKDIR /var/www
 
 #GRANT PRIVILEGIES TO www-data user:group to read in /var/www
 RUN chown -R www-data:www-data /var/www
+
+# KICKSTART!
+ENTRYPOINT ["start.sh"]
