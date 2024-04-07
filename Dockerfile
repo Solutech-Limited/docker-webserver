@@ -15,7 +15,7 @@ RUN apk --update --no-cache add ca-certificates \
 ADD https://dl.bintray.com/php-alpine/key/php-alpine.rsa.pub /etc/apk/keys/php-alpine.rsa.pub
 
 # CONFIGURE ALPINE REPOSITORIES AND PHP BUILD DIR.
-FROM php8.2-fpm-alpine:latest
+FROM php:8.2-fpm-alpine
 
 # INSTALL PHP AND SOME EXTENSIONS. SEE: https://github.com/codecasts/php-alpine
 RUN apk add --no-cache --update php-fpm \
