@@ -49,7 +49,7 @@ RUN mkdir -p /var/www && \
     rm /etc/php8.2/php.ini
 
 # INSTALL COMPOSER.
-COPY --from=composer:1.10 /usr/bin/composer /usr/bin/composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # ADD START SCRIPT, SUPERVISOR CONFIG, NGINX CONFIG AND RUN SCRIPTS.
 ADD start.sh /start.sh
