@@ -18,11 +18,7 @@ RUN apk add --no-cache --update \
     bash \
     supervisor \
     nginx \
-    curl \
-    git \
-    unzip \
-    zip \
-    nano \
+    php \
     php-fpm \
     php-openssl \
     php-pdo \
@@ -68,21 +64,6 @@ WORKDIR /var/www
 
 #GRANT PRIVILEGIES TO www-data user:group to read in /var/www
 RUN chown -R www-data:www-data /var/www
-
-FROM ubuntu:20.04
-
-# Install some system packages
-RUN apt-get update && apt-get install -y \
-    nginx \
-    supervisor \
-    curl \
-    git \
-    unzip \
-    zip \
-    nano \
-    wget \
-    software-properties-common \
-    && apt-get clean
 
 # Start script file
 CMD ["/usr/local/bin/start.sh"]
