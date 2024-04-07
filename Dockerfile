@@ -43,12 +43,13 @@ RUN mkdir -p /var/www && \
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # ADD START SCRIPT, SUPERVISOR CONFIG, NGINX CONFIG AND RUN SCRIPTS.
-ADD start.sh /start.sh
 ADD config/supervisor/supervisord.conf /etc/supervisord.conf
 ADD config/nginx/nginx.conf /etc/nginx/nginx.conf
 ADD config/nginx/site.conf /etc/nginx/sites-available/default.conf
 ADD config/php/php.ini /etc/php8.2/php.ini
 ADD config/php-fpm/www.conf /etc/php8.2/php-fpm.d/www.conf
+
+# make the shell script on the root start.sh executable
 RUN chmod +x /start.sh
 
 # EXPOSE PORTS!
@@ -62,5 +63,5 @@ WORKDIR /var/www
 #GRANT PRIVILEGIES TO www-data user:group to read in /var/www
 RUN chown -R www-data:www-data /var/www
 
-# KICKSTART!
-ENTRYPOINT ["/start.sh"]
+# Start script file
+CMD ["/start.sh"]

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # UPDATE THE WEBROOT IF REQUIRED.
 if [[ ! -z "${WEBROOT}" ]] && [[ ! -z "${WEBROOT_PUBLIC}" ]]; then
