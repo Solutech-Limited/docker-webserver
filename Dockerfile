@@ -56,11 +56,11 @@ ARG NGINX_HTTP_PORT=80
 ARG NGINX_HTTPS_PORT=443
 EXPOSE ${NGINX_HTTPS_PORT} ${NGINX_HTTP_PORT}
 
+# KICKSTART!
+CMD ["/start.sh"]
+
 # SET THE WORK DIRECTORY.
 WORKDIR /var/www
 
 #GRANT PRIVILEGIES TO www-data user:group to read in /var/www
 RUN chown -R www-data:www-data /var/www
-
-# KICKSTART!
-CMD "start.sh"
