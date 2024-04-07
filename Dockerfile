@@ -15,15 +15,10 @@ RUN apk --update --no-cache add ca-certificates \
 ADD https://dl.bintray.com/php-alpine/key/php-alpine.rsa.pub /etc/apk/keys/php-alpine.rsa.pub
 
 # CONFIGURE ALPINE REPOSITORIES AND PHP BUILD DIR.
-ARG PHP_VERSION=8.2
-ARG ALPINE_VERSION=3.9
-RUN echo "http://dl-cdn.alpinelinux.org/alpine/v${ALPINE_VERSION}/main" > /etc/apk/repositories && \
-    echo "http://dl-cdn.alpinelinux.org/alpine/v${ALPINE_VERSION}/community" >> /etc/apk/repositories && \
-    echo "https://dl.bintray.com/php-alpine/v${ALPINE_VERSION}/php-${PHP_VERSION}" >> /etc/apk/repositories
+FROM php:8.2-fpm-alpine
 
 # INSTALL PHP AND SOME EXTENSIONS. SEE: https://github.com/codecasts/php-alpine
 RUN apk add --no-cache --update php-fpm \
-    php \
     php-openssl \
     php-pdo \
     php-pdo_mysql \
@@ -34,8 +29,7 @@ RUN apk add --no-cache --update php-fpm \
     php-ctype \
     php-zlib \
     php-json \
-    php-xml && \
-    ln -s /usr/bin/php8.2 /usr/bin/php
+    php-xml
 
 # CONFIGURE WEB SERVER.
 RUN mkdir -p /var/www && \
@@ -43,13 +37,10 @@ RUN mkdir -p /var/www && \
     mkdir -p /run/nginx && \
     mkdir -p /var/log/supervisor && \
     mkdir -p /etc/nginx/sites-enabled && \
-    mkdir -p /etc/nginx/sites-available && \
-    rm /etc/nginx/nginx.conf && \
-    rm /etc/php8.2/php-fpm.d/www.conf && \
-    rm /etc/php8.2/php.ini
+    mkdir -p /etc/nginx/sites-available
 
 # INSTALL COMPOSER.
-COPY --from=composer:1.10 /usr/bin/composer /usr/bin/composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # ADD START SCRIPT, SUPERVISOR CONFIG, NGINX CONFIG AND RUN SCRIPTS.
 ADD start.sh /start.sh
