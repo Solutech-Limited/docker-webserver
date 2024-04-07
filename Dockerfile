@@ -29,8 +29,7 @@ RUN apk add --no-cache --update php-fpm \
     php-ctype \
     php-zlib \
     php-json \
-    php-xml && \
-    ln -s /usr/bin/php8.2 /usr/bin/php
+    php-xml
 
 # CONFIGURE WEB SERVER.
 RUN mkdir -p /var/www && \
