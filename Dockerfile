@@ -50,7 +50,7 @@ ADD config/php/php.ini /etc/php8.2/php.ini
 ADD config/php-fpm/www.conf /etc/php8.2/php-fpm.d/www.conf
 
 # make the shell script on the root start.sh executable
-RUN chmod +x ./start.sh
+RUN chmod +x start.sh
 
 # EXPOSE PORTS!
 ARG NGINX_HTTP_PORT=80
@@ -64,4 +64,4 @@ WORKDIR /var/www
 RUN chown -R www-data:www-data /var/www
 
 # Start script file
-CMD ["./start.sh"]
+CMD ["start.sh"]
