@@ -19,7 +19,6 @@ FROM php:8.2-fpm-alpine
 
 # INSTALL PHP AND SOME EXTENSIONS. SEE: https://github.com/codecasts/php-alpine
 RUN apk add --no-cache --update php-fpm \
-    php \
     php-openssl \
     php-pdo \
     php-pdo_mysql \
