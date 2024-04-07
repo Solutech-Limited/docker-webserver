@@ -63,4 +63,4 @@ WORKDIR /var/www
 RUN chown -R www-data:www-data /var/www
 
 # KICKSTART!
-CMD ["/start.sh"]
+CMD "start.sh"
