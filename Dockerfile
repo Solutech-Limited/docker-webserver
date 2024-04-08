@@ -23,7 +23,7 @@ RUN apk add --no-cache --update \
     php-fpm \
     php-openssl \
     php-pdo_mysql \
-    php-mysql \
+    php-mysqli \
     php-mbstring \
     php-zlib \
     php-json \
