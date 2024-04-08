@@ -18,6 +18,7 @@ RUN apk add --no-cache --update \
     bash \
     supervisor \
     nginx \
+    nano \
     php \
     php-fpm \
     php-openssl \
