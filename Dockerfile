@@ -25,13 +25,12 @@ RUN apk add --no-cache --update \
     php8.2-pdo \
     php8.2-pdo_mysql \
     php8.2-mbstring \
-    php8.2-phar \
-    php8.2-session \
-    php8.2-dom \
-    php8.2-ctype \
-    php8.2-zlib \
+    php8.2-cli \
+    php8.2-common \
     php8.2-json \
+    php8.2-curl \
     php8.2-xml \
+    php8.2-gd \
     systemd
 
 # CONFIGURE WEB SERVER.
