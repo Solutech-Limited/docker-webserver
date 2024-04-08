@@ -8,11 +8,6 @@ else
     export WEBROOT_PUBLIC=/var/www/public
 fi
 
-# UPDATE COMPOSER PACKAGES ON BUILD.
-## 💡 THIS MAY MAKE THE BUILD SLOWER BECAUSE IT HAS TO FETCH PACKAGES.
-cd /var/www
-composer install && composer dump-autoload -o
-
 # LARAVEL APPLICATION
 if [[ "${LARAVEL_APP}" == "1" ]]; then
     # RUN LARAVEL MIGRATIONS ON BUILD.
