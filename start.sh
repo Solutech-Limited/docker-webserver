@@ -58,7 +58,7 @@ if [ ! -z "${PHP_UPLOAD_MAX_FILESIZE}" ]; then
 fi
 
 
-find /etc/php8.2/conf.d/ -name "*.ini" -exec sed -i -re 's/^(\s*)#(.*)/\1;\2/g' {} \;
+# find /etc/php8.2/conf.d/ -name "*.ini" -exec sed -i -re 's/^(\s*)#(.*)/\1;\2/g' {} \;
 
 # START SUPERVISOR.
 exec /usr/bin/supervisord -n -c /etc/supervisord.conf
