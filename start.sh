@@ -10,10 +10,7 @@ fi
 
 # UPDATE COMPOSER PACKAGES ON BUILD.
 ## 💡 THIS MAY MAKE THE BUILD SLOWER BECAUSE IT HAS TO FETCH PACKAGES.
-if [[ ! -z "${COMPOSER_DIRECTORY}" ]] && [[ "${COMPOSER_INSTALL_ON_BUILD}" == "1" ]]; then
-    cd ${COMPOSER_DIRECTORY}
-    composer install && composer dump-autoload -o
-fi
+composer install && composer dump-autoload -o
 
 # LARAVEL APPLICATION
 if [[ "${LARAVEL_APP}" == "1" ]]; then
