@@ -19,19 +19,15 @@ RUN apk add --no-cache --update \
     supervisor \
     nginx \
     nano \
-    php8.2 \
-    php8.2-fpm \
-    php8.2-openssl \
-    php8.2-pdo \
-    php8.2-pdo_mysql \
-    php8.2-mbstring \
-    php8.2-cli \
-    php8.2-common \
-    php8.2-json \
-    php8.2-curl \
-    php8.2-xml \
-    php8.2-gd \
-    systemd
+    php \
+    php-fpm \
+    php-openssl \
+    php-pdo_mysql \
+    php-mbstring \
+    php-zlib \
+    php-json \
+    php-xml \
+    php-common
 
 # CONFIGURE WEB SERVER.
 RUN mkdir -p /var/www && \
