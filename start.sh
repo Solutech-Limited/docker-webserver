@@ -35,14 +35,14 @@ ln -s /etc/php8.2/php.ini /etc/php/8.2/fpm/php.ini
 ln -s /etc/nginx/sites-available/default.conf /etc/nginx/sites-enabled/default.conf
 
 # PRODUCTION LEVEL CONFIGURATION.
-if [[ "${PRODUCTION}" == "1" ]]; then
-    sed -i -e "s/;log_level = notice/log_level = warning/g" /etc/php/8.2/fpm/php-fpm.conf
-    sed -i -e "s/clear_env = no/clear_env = yes/g" /etc/php/8.2/fpm/pool.d/www.conf
-    sed -i -e "s/display_errors = On/display_errors = Off/g" /etc/php/8.2/fpm/php.ini
-else
-    sed -i -e "s/;log_level = notice/log_level = notice/g" /etc/php/8.2/fpm/php-fpm.conf
-    sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php/8.2/fpm/php-fpm.conf
-fi
+# if [[ "${PRODUCTION}" == "1" ]]; then
+#     sed -i -e "s/;log_level = notice/log_level = warning/g" /etc/php/8.2/fpm/php-fpm.conf
+#     sed -i -e "s/clear_env = no/clear_env = yes/g" /etc/php/8.2/fpm/pool.d/www.conf
+#     sed -i -e "s/display_errors = On/display_errors = Off/g" /etc/php/8.2/fpm/php.ini
+# else
+#     sed -i -e "s/;log_level = notice/log_level = notice/g" /etc/php/8.2/fpm/php-fpm.conf
+#     sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php/8.2/fpm/php-fpm.conf
+# fi
 
 # PHP & SERVER CONFIGURATIONS.
 if [[ ! -z "${PHP_MEMORY_LIMIT}" ]]; then
