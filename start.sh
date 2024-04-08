@@ -62,9 +62,3 @@ fi
 
 # START SUPERVISOR.
 exec /usr/bin/supervisord -n -c /etc/supervisord.conf
-
-# restart php-fpm service
-service php8.2-fpm restart
-
-# restart nginx service
-service nginx restart
