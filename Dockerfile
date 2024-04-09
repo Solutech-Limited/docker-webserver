@@ -28,7 +28,8 @@ RUN apk add --no-cache --update \
     php-zlib \
     php-json \
     php-xml \
-    php-common
+    php-common \
+    php-session
 
 RUN docker-php-ext-install mysqli pdo pdo_mysql
 
