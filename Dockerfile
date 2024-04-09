@@ -23,11 +23,15 @@ RUN apk add --no-cache --update \
     php-fpm \
     php-openssl \
     php-pdo_mysql \
+    php-mysqli \
     php-mbstring \
     php-zlib \
     php-json \
     php-xml \
-    php-common
+    php-common \
+    php-session
+
+RUN docker-php-ext-install mysqli pdo pdo_mysql
 
 # CONFIGURE WEB SERVER.
 RUN mkdir -p /var/www && \
