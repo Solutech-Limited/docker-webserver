@@ -17,6 +17,9 @@ if [[ "${LARAVEL_APP}" == "1" ]]; then
         # run tenants migration
         cd ${WEBROOT}
         php artisan tenants:migrate
+        # clear opcache
+        cd ${WEBROOT}
+        php artisan opcache:clear
     fi
 
     # LARAVEL SCHEDULER
