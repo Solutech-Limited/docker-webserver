@@ -31,7 +31,7 @@ RUN apk add --no-cache --update \
     php-common \
     php-session
 
-RUN docker-php-ext-install mysqli pdo pdo_mysql
+RUN docker-php-ext-install mysqli pdo pdo_mysql opcache
 
 # CONFIGURE WEB SERVER.
 RUN mkdir -p /var/www && \
