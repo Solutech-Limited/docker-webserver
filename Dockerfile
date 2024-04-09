@@ -30,6 +30,8 @@ RUN apk add --no-cache --update \
     php-xml \
     php-common
 
+RUN docker-php-ext-install mysqli pdo pdo_mysql
+
 # CONFIGURE WEB SERVER.
 RUN mkdir -p /var/www && \
     mkdir -p /run/php && \
