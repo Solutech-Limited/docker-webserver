@@ -29,7 +29,8 @@ RUN apk add --no-cache --update \
     php-json \
     php-xml \
     php-common \
-    php-session
+    php-session \
+    php-redis
 
 RUN docker-php-ext-install mysqli pdo pdo_mysql opcache
 
