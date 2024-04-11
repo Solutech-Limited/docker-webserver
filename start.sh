@@ -20,6 +20,9 @@ if [[ "${LARAVEL_APP}" == "1" ]]; then
         # clear opcache
         cd ${WEBROOT}
         php artisan opcache:clear
+        # restart pulse
+        cd ${WEBROOT}
+        php artisan pulse:restart
     fi
 
     # LARAVEL SCHEDULER
