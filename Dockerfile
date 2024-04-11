@@ -10,7 +10,7 @@ LABEL maintainer="Neo Ighodaro <neo@creativitykills.co>"
 ADD https://dl.bintray.com/php-alpine/key/php-alpine.rsa.pub /etc/apk/keys/php-alpine.rsa.pub
 
 # CONFIGURE ALPINE REPOSITORIES AND PHP BUILD DIR.
-FROM php:8.2-fpm-buster
+FROM php:8.2-fpm-alpine
 
 # INSTALL SYSTEM PACKAGES PHP AND SOME EXTENSIONS. SEE: https://github.com/codecasts/php-alpine
 RUN apk add --no-cache --update \
@@ -30,9 +30,10 @@ RUN apk add --no-cache --update \
     php-xml \
     php-common \
     php-session \
-    php-redis
+    php-redis \
+    php-tokenizer
 
-RUN docker-php-ext-install mysqli pdo pdo_mysql opcache tokenizer
+RUN docker-php-ext-install mysqli pdo pdo_mysql opcache
 
 # install redis
 RUN apk add --no-cache pcre-dev $PHPIZE_DEPS \
