@@ -31,10 +31,9 @@ RUN apk add --no-cache --update \
     php-common \
     php-session \
     php-redis \
-    g++ \
-    make
+    tokenizer
 
-RUN docker-php-ext-install mysqli pdo pdo_mysql opcache tokenizer
+RUN docker-php-ext-install mysqli pdo pdo_mysql opcache
 
 # install redis
 RUN apk add --no-cache pcre-dev $PHPIZE_DEPS \
