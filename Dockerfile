@@ -37,11 +37,6 @@ RUN apk add --no-cache --update \
 
 RUN docker-php-ext-install mysqli pdo pdo_mysql opcache
 
-# install redis
-RUN apk add --no-cache pcre-dev $PHPIZE_DEPS \
-    && pecl install redis \
-    && docker-php-ext-enable redis.so
-
 # CONFIGURE WEB SERVER.
 RUN mkdir -p /var/www && \
     mkdir -p /run/php && \
