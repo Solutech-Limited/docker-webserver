@@ -34,7 +34,7 @@ RUN apk add --no-cache --update \
     php-tokenizer \
     php-opcache \
     php-dom \
-    shadow-utils
+    shadow
 
 RUN docker-php-ext-install mysqli pdo pdo_mysql opcache
 
