@@ -3,10 +3,6 @@
 # NGINX x ALPINE.
 FROM nginx:alpine
 
-# run all commands as non-root user
-RUN useradd -u 1010 www-data
-USER www-data
-
 # MAINTAINER OF THE PACKAGE.
 LABEL maintainer="Morris Mburu <morrisonmburu7@gmail.com>"
 
