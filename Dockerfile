@@ -33,7 +33,8 @@ RUN apk add --no-cache --update \
     php-redis \
     php-tokenizer \
     php-opcache \
-    php-dom
+    php-dom \
+    shadow-utils
 
 RUN docker-php-ext-install mysqli pdo pdo_mysql opcache
 
