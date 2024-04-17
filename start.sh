@@ -55,5 +55,5 @@ if [ ! -z "${PHP_UPLOAD_MAX_FILESIZE}" ]; then
 fi
 
 # START SUPERVISOR.
-exec /usr/bin/supervisord -n -c /etc/supervisord.conf
+exec sudo /usr/bin/supervisord -n -c /etc/supervisord.conf
 
