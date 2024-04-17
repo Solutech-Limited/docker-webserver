@@ -92,3 +92,4 @@ WORKDIR /var/www
 # Start script file
 USER chuchu
 CMD ["/usr/local/bin/start.sh"]
+

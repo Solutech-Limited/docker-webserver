@@ -32,8 +32,7 @@ if [[ "${LARAVEL_APP}" == "1" ]]; then
 
     # LARAVEL SCHEDULER
     if [[ "${RUN_LARAVEL_SCHEDULER}" == "1" ]]; then
-        sudo touch /etc/crontabs/www-data
-        sudo echo '* * * * * cd /var/www && sudo php artisan schedule:run >> /dev/null 2>&1' > /etc/crontabs/www-data
+        sudo echo '* * * * * cd /var/www && sudo php artisan schedule:run >> /dev/null 2>&1' | sudo tee /etc/crontabs/www-data > /dev/null
         sudo crond
     fi
 fi
