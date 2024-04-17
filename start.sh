@@ -56,4 +56,3 @@ fi
 
 # START SUPERVISOR.
 exec sudo /usr/bin/supervisord -n -c /etc/supervisord.conf
-

@@ -58,11 +58,6 @@ RUN mkdir -p /var/www && \
 USER www-data
 
 COPY --chown=www-data:www-data . /var/www
-COPY --chown=www-data:www-data . /run/php
-COPY --chown=www-data:www-data . /run/nginx
-COPY --chown=www-data:www-data . /var/log/supervisor
-COPY --chown=www-data:www-data . /etc/nginx/sites-enabled
-COPY --chown=www-data:www-data . /etc/nginx/sites-available
 
 # INSTALL COMPOSER.
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
