@@ -84,3 +84,4 @@ RUN sudo chown -R www-data:www-data /var/www
 
 # Start script file
 CMD ["/usr/local/bin/start.sh"]
+
