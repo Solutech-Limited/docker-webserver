@@ -73,6 +73,7 @@ COPY config/nginx/site.conf /etc/nginx/sites-available/default.conf
 COPY config/php/php.ini /etc/php8.2/php.ini
 COPY config/php-fpm/www.conf /etc/php/8.2/fpm/pool.d/www.conf
 
+
 # make the shell script on the root directory executable
 COPY start.sh /usr/local/bin/start.sh
 RUN sudo chmod +x /usr/local/bin/start.sh
