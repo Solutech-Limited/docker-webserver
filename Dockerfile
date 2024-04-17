@@ -34,7 +34,8 @@ RUN apk add --no-cache --update \
     php-tokenizer \
     php-opcache \
     php-dom \
-    shadow
+    shadow \
+    sudo
 
 RUN docker-php-ext-install mysqli pdo pdo_mysql opcache
 
@@ -43,6 +44,11 @@ RUN apk add --no-cache pcre-dev $PHPIZE_DEPS \
     && pecl install redis \
     && docker-php-ext-enable redis.so
 
+USER www-data
+
+# add www-data to sudoers
+RUN echo "www-data ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers.d/www-data
+
 # CONFIGURE WEB SERVER.
 RUN mkdir -p /var/www && \
     mkdir -p /run/php && \
@@ -50,6 +56,13 @@ RUN mkdir -p /var/www && \
     mkdir -p /var/log/supervisor && \
     mkdir -p /etc/nginx/sites-enabled && \
     mkdir -p /etc/nginx/sites-available
+
+COPY --chown=www-data:www-data . /var/www
+COPY --chown=www-data:www-data . /run/php
+COPY --chown=www-data:www-data . /run/nginx
+COPY --chown=www-data:www-data . /var/log/supervisor
+COPY --chown=www-data:www-data . /etc/nginx/sites-enabled
+COPY --chown=www-data:www-data . /etc/nginx/sites-available
 
 # INSTALL COMPOSER.
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
