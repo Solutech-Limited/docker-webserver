@@ -34,7 +34,8 @@ RUN apk add --no-cache --update \
     php-tokenizer \
     php-opcache \
     php-dom \
-    shadow
+    shadow \
+    sudo
 
 RUN docker-php-ext-install mysqli pdo pdo_mysql opcache
 
@@ -43,6 +44,9 @@ RUN apk add --no-cache pcre-dev $PHPIZE_DEPS \
     && pecl install redis \
     && docker-php-ext-enable redis.so
 
+# add www-data to sudoers
+RUN echo "www-data ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers.d/www-data
+
 # CONFIGURE WEB SERVER.
 RUN mkdir -p /var/www && \
     mkdir -p /run/php && \
@@ -50,6 +54,10 @@ RUN mkdir -p /var/www && \
     mkdir -p /var/log/supervisor && \
     mkdir -p /etc/nginx/sites-enabled && \
     mkdir -p /etc/nginx/sites-available
+
+RUN chown -R www-data:www-data /etc/supervisord.conf && \
+    chown -R www-data:www-data /usr/bin/supervisord && \
+    chown -R www-data:www-data /usr/bin/composer
 
 # INSTALL COMPOSER.
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -61,9 +69,11 @@ COPY config/nginx/site.conf /etc/nginx/sites-available/default.conf
 COPY config/php/php.ini /etc/php8.2/php.ini
 COPY config/php-fpm/www.conf /etc/php/8.2/fpm/pool.d/www.conf
 
+USER www-data
+
 # make the shell script on the root directory executable
 COPY start.sh /usr/local/bin/start.sh
-RUN chmod +x /usr/local/bin/start.sh
+RUN sudo chmod +x /usr/local/bin/start.sh
 
 # EXPOSE PORTS!
 ARG NGINX_HTTP_PORT=80
@@ -74,7 +84,7 @@ EXPOSE ${NGINX_HTTPS_PORT} ${NGINX_HTTP_PORT}
 WORKDIR /var/www
 
 #GRANT PRIVILEGIES TO www-data user:group to read in /var/www
-RUN chown -R www-data:www-data /var/www
+RUN sudo chown -R www-data:www-data /var/www
 
 # Start script file
-# CMD ["/usr/local/bin/start.sh"]
+CMD ["/usr/local/bin/start.sh"]
