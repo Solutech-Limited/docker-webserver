@@ -75,7 +75,7 @@ RUN chown -R www-data:www-data /etc/supervisord.conf && \
 # make the shell script on the root directory executable
 COPY start.sh /usr/local/bin/start.sh
 RUN chmod +x /usr/local/bin/start.sh
-RUN chmod -R 771 /usr/local/bin/start.sh
+RUN chmod -R 777 /usr/local/bin/start.sh
 
 USER www-data
 
