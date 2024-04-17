@@ -44,8 +44,6 @@ RUN apk add --no-cache pcre-dev $PHPIZE_DEPS \
     && pecl install redis \
     && docker-php-ext-enable redis.so
 
-USER www-data
-
 # add www-data to sudoers
 RUN echo "www-data ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers.d/www-data
 
@@ -56,6 +54,8 @@ RUN mkdir -p /var/www && \
     mkdir -p /var/log/supervisor && \
     mkdir -p /etc/nginx/sites-enabled && \
     mkdir -p /etc/nginx/sites-available
+
+USER www-data
 
 COPY --chown=www-data:www-data . /var/www
 COPY --chown=www-data:www-data . /run/php
@@ -76,7 +76,7 @@ COPY config/php-fpm/www.conf /etc/php/8.2/fpm/pool.d/www.conf
 
 # make the shell script on the root directory executable
 COPY start.sh /usr/local/bin/start.sh
-RUN chmod +x /usr/local/bin/start.sh
+RUN sudo chmod +x /usr/local/bin/start.sh
 
 # EXPOSE PORTS!
 ARG NGINX_HTTP_PORT=80
@@ -87,7 +87,7 @@ EXPOSE ${NGINX_HTTPS_PORT} ${NGINX_HTTP_PORT}
 WORKDIR /var/www
 
 #GRANT PRIVILEGIES TO www-data user:group to read in /var/www
-RUN chown -R www-data:www-data /var/www
+RUN sudo chown -R www-data:www-data /var/www
 
 # Start script file
 CMD ["/usr/local/bin/start.sh"]
