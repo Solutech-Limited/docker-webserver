@@ -55,10 +55,6 @@ RUN mkdir -p /var/www && \
     mkdir -p /etc/nginx/sites-enabled && \
     mkdir -p /etc/nginx/sites-available
 
-RUN chown -R www-data:www-data /etc/supervisord.conf && \
-    chown -R www-data:www-data /usr/bin/supervisord && \
-    chown -R www-data:www-data /usr/bin/composer
-
 # INSTALL COMPOSER.
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
@@ -68,6 +64,10 @@ COPY config/nginx/nginx.conf /etc/nginx/nginx.conf
 COPY config/nginx/site.conf /etc/nginx/sites-available/default.conf
 COPY config/php/php.ini /etc/php8.2/php.ini
 COPY config/php-fpm/www.conf /etc/php/8.2/fpm/pool.d/www.conf
+
+RUN chown -R www-data:www-data /etc/supervisord.conf && \
+    chown -R www-data:www-data /usr/bin/supervisord && \
+    chown -R www-data:www-data /usr/bin/composer
 
 USER www-data
 
