@@ -65,10 +65,6 @@ COPY config/nginx/site.conf /etc/nginx/sites-available/default.conf
 COPY config/php/php.ini /etc/php8.2/php.ini
 COPY config/php-fpm/www.conf /etc/php/8.2/fpm/pool.d/www.conf
 
-RUN chown -R www-data:www-data /etc/supervisord.conf && \
-    chown -R www-data:www-data /usr/bin/supervisord && \
-    chown -R www-data:www-data /usr/bin/composer
-
 USER www-data
 
 # make the shell script on the root directory executable
