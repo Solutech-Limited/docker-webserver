@@ -6,7 +6,7 @@ name: Push to docker hub
 # events but only for the master branch
 on:
   push:
-    branches: [ main ]
+    branches: [ make-image-run-as-non-rooot-user ]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -17,7 +17,7 @@ jobs:
     
     # Variables used  
     env:
-      image_name: morrismburu/nginx-php-server:latest
+      image_name: morrismburu/nginx-php-server:0.9
       DOCKER_ID: ${{ secrets.DOCKER_ID }}
       DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
     
