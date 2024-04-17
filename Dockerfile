@@ -55,9 +55,14 @@ RUN mkdir -p /var/www && \
     mkdir -p /etc/nginx/sites-enabled && \
     mkdir -p /etc/nginx/sites-available
 
-USER www-data
+RUN chown -R www-data:www-data /var/www && \
+    chown -R www-data:www-data /run/php && \
+    chown -R www-data:www-data /run/nginx && \
+    chown -R www-data:www-data /var/log/supervisor && \
+    chown -R www-data:www-data /etc/nginx/sites-enabled && \
+    chown -R www-data:www-data /etc/nginx/sites-available
 
-COPY --chown=www-data:www-data . /var/www
+USER www-data
 
 # INSTALL COMPOSER.
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
@@ -71,7 +76,7 @@ COPY config/php-fpm/www.conf /etc/php/8.2/fpm/pool.d/www.conf
 
 # make the shell script on the root directory executable
 COPY start.sh /usr/local/bin/start.sh
-RUN sudo chmod +x /usr/local/bin/start.sh
+RUN chmod +x /usr/local/bin/start.sh
 
 # EXPOSE PORTS!
 ARG NGINX_HTTP_PORT=80
@@ -80,9 +85,5 @@ EXPOSE ${NGINX_HTTPS_PORT} ${NGINX_HTTP_PORT}
 
 # SET THE WORK DIRECTORY.
 WORKDIR /var/www
-
-#GRANT PRIVILEGIES TO www-data user:group to read in /var/www
-RUN sudo chown -R www-data:www-data /var/www
-
 # Start script file
 CMD ["/usr/local/bin/start.sh"]
