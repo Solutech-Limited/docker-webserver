@@ -13,18 +13,18 @@ if [[ "${LARAVEL_APP}" == "1" ]]; then
     # INSTALL LARAVEL PACKAGES.
     if [[ "${INSTALL_LARAVEL_PACKAGES}" == "1" ]]; then
         cd ${WEBROOT}
-        composer install --no-interaction --prefer-dist --optimize-autoloader
+        sudo composer install --no-interaction --prefer-dist --optimize-autoloader
     fi
     # RUN LARAVEL MIGRATIONS ON BUILD.
     if [[ "${RUN_LARAVEL_MIGRATIONS_ON_BUILD}" == "1" ]]; then
         cd ${WEBROOT}
-        php artisan migrate
+        sudo php artisan migrate
         # run tenants migration
         cd ${WEBROOT}
-        php artisan tenants:migrate
+        sudo php artisan tenants:migrate
         # clear opcache
         cd ${WEBROOT}
-        php -r "opcache_reset();"
+        sudo php -r "opcache_reset();"
         # # restart pulse
         # cd ${WEBROOT}
         # php artisan pulse:restart
@@ -32,14 +32,14 @@ if [[ "${LARAVEL_APP}" == "1" ]]; then
 
     # LARAVEL SCHEDULER
     if [[ "${RUN_LARAVEL_SCHEDULER}" == "1" ]]; then
-        echo '* * * * * cd /var/www && php artisan schedule:run >> /dev/null 2>&1' > /etc/crontabs/root
-        crond
+        sudo echo '* * * * * cd /var/www && php artisan schedule:run >> /dev/null 2>&1' > /etc/crontabs/root
+        sudo crond
     fi
 fi
 
 # SYMLINK CONFIGURATION FILES.
-ln -s /etc/php8.2/php.ini /etc/php/8.2/fpm/php.ini
-ln -s /etc/nginx/sites-available/default.conf /etc/nginx/sites-enabled/default.conf
+sudo ln -s /etc/php8.2/php.ini /etc/php/8.2/fpm/php.ini
+sudo ln -s /etc/nginx/sites-available/default.conf /etc/nginx/sites-enabled/default.conf
 
 # PHP & SERVER CONFIGURATIONS.
 if [[ ! -z "${PHP_MEMORY_LIMIT}" ]]; then
