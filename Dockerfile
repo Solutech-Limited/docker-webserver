@@ -45,7 +45,7 @@ RUN apk add --no-cache pcre-dev $PHPIZE_DEPS \
     && docker-php-ext-enable redis.so
 
 # Create user kubernetesuser
-RUN useradd -ms /bin/bash kubernetesuser
+RUN useradd -ms /bin/bash kubernetesuser -u 10001
 
 # add kubernetesuser to sudoers
 RUN echo "kubernetesuser ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers.d/kubernetesuser
