@@ -4,7 +4,7 @@
 FROM nginx:alpine
 
 # MAINTAINER OF THE PACKAGE.
-LABEL maintainer="Morris Mburu <morrisonmburu7@gmail.com>"
+LABEL maintainer="solutechlimited <info@solutech.co.ke>"
 
 # trust this project public key to trust the packages.
 ADD https://dl.bintray.com/php-alpine/key/php-alpine.rsa.pub /etc/apk/keys/php-alpine.rsa.pub
