@@ -8,7 +8,7 @@ Using the Laravel installer you can get up and running with a Laravel applicatio
 
 - Create a new Laravel application `$ laravel new testapp`
 - Change to the applications directory `$ cd testapp`
-- Start the container and attach the application. `$ docker run -d -p 4488:80 --name=testapp -v $PWD:/var/www creativitykills/nginx-php-server`
+- Start the container and attach the application. `$ docker run -d -p 4488:80 --name=testapp -v $PWD:/var/www morrismburu/nginx-php-server:latest`
 - Visit the Docker container URL like [http://0.0.0.0:4488](http://0.0.0.0:4488). Profit!
 
 ### Args
@@ -17,7 +17,7 @@ Here are some args
 
 - `NGINX_HTTP_PORT` - HTTP port. Default: `80`.
 - `NGINX_HTTPS_PORT` - HTTPS port. Default: `443`.
-- `PHP_VERSION` - The PHP version to install. Supports: `7.3`. Default: `7.3`.
+- `PHP_VERSION` - The PHP version to install. Supports: `>8.2`. Default: `8.2`.
 - `ALPINE_VERSION` - The Alpine version. Supports: `3.9`. Default: `3.9`.
 
 ### Environment Variables

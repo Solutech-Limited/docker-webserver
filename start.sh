@@ -30,6 +30,11 @@ if [[ "${LARAVEL_APP}" == "1" ]]; then
         # php artisan pulse:restart
     fi
 
+    if [[ "${RUN_PASSPORT_INSTALL_KEYS}" == "1" ]]; then
+        cd ${WEBROOT}
+        sudo php artisan passport:keys
+    fi
+
     # LARAVEL SCHEDULER
     if [[ "${RUN_LARAVEL_SCHEDULER}" == "1" ]]; then
         sudo echo '* * * * * cd /var/www && sudo php artisan schedule:run >> /dev/null 2>&1' | sudo tee /etc/crontabs/kubernetesuser > /dev/null
