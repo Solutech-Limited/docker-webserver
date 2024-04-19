@@ -15,12 +15,12 @@ jobs:
       uses: docker/login-action@v3
       with:
         username: ${{ secrets.DOCKER_ID }}
-        assword: ${{ secrets.DOCKER_TOKEN }}
+        password: ${{ secrets.DOCKER_TOKEN }}
 
     # get release tag version
     - name: Get release tag
       id: get_tag
-      run: echo ::set-output name=tag::${GITHUB_REF/refs\/tags\//}
+      run: echo "tag=$(echo $GITHUB_REF | cut -d / -f 3)" >> $GITHUB_OUTPUT
 
     # build docker image with a tag
     - name: build docker image
