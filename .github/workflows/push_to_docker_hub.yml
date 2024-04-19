@@ -1,4 +1,4 @@
-name: Push to google cloud registry
+name: Push to docker hub
 
 on:
   release:
@@ -8,36 +8,26 @@ jobs:
   build_and_push:
     runs-on: ubuntu-latest
     
-    env:
-      PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
-      REPO_NAME: ${{ secrets.REPO_NAME }}
-    
     steps:
     - uses: actions/checkout@v2
 
-    # Authenticate with Google Cloud
-    - id: authenticate
-      uses: google-github-actions/auth@v2
+    - name: Authenticate to Docker
+      uses: docker/login-action@v3
       with:
-        credentials_json: ${{ secrets.GCLOUD_AUTH }}
-
-    #Setup Cloud CLI
-    - name: Cloud CLI
-      uses: google-github-actions/setup-gcloud@v2
-
-    - name: Authenticate Docker
-      run: |-
-        gcloud auth configure-docker us-central1-docker.pkg.dev
+        username: ${{ secrets.DOCKER_ID }}
+        assword: ${{ secrets.DOCKER_TOKEN }}
 
     # get release tag version
     - name: Get release tag
       id: get_tag
       run: echo ::set-output name=tag::${GITHUB_REF/refs\/tags\//}
 
-    # Build the Docker image
-    - name: Build
-      run: docker build -t us-central1-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/$REPO_NAME:${{ steps.get_tag.outputs.tag }} .
-
-    # Push the Docker image
-    - name: Push
-      run: docker push us-central1-docker.pkg.dev/$PROJECT_ID/$REPO_NAME/$REPO_NAME:${{ steps.get_tag.outputs.tag }}
+    # build docker image with a tag
+    - name: build docker image
+      run: |
+        docker build -t laravel-backend/nginx-php-server:${{ steps.get_tag.outputs.tag }} .
+    
+    # push image to docker hub
+    - name: push to docker
+      run: docker push laravel-backend/nginx-php-server:${{ steps.get_tag.outputs.tag }}
+      
