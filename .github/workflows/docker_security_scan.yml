@@ -15,7 +15,7 @@ jobs:
             - name: Build the docker image
               run: docker build -t docker-webserver .
             
-            - name: Authenticate to Docker
+            - name: Authenticate to Docker hub
               uses: docker/login-action@v3
               with:
                 username: ${{ secrets.DOCKER_ID }}
