@@ -1,0 +1,42 @@
+name: Scan docker image for vulnerabilities
+
+on:
+    pull_request:
+        branches:
+            - master
+
+jobs:
+    run-docker-security-scan:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+            
+            - name: Build the docker image
+              run: docker build -t docker-webserver .
+            
+            - name: Authenticate to Docker
+              uses: docker/login-action@v3
+              with:
+                username: ${{ secrets.DOCKER_ID }}
+                password: ${{ secrets.DOCKER_TOKEN }}
+
+            - name: High level scan of the docker image
+              uses: docker/scout-action@v1
+              with:
+                command: quickview
+                image: docker-webserver
+                only-severities: critical,high
+            
+            - name: Scan for CVEs
+              uses: docker/scout-action@v1
+              with:
+                command: cves
+                image: docker-webserver
+                ignore-unchanged: true
+            
+            - name: Provide recommendations to fix issues
+              uses: docker/scout-action@v1
+              with:
+                command: recommendations
+                image: docker-webserver:latest
