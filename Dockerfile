@@ -4,7 +4,7 @@
 FROM nginx:alpine
 
 # MAINTAINER OF THE PACKAGE.
-LABEL maintainer="Morris Mburu <morrisonmburu7@gmail.com>"
+LABEL maintainer="solutechlimited <info@solutech.co.ke>"
 
 # trust this project public key to trust the packages.
 ADD https://dl.bintray.com/php-alpine/key/php-alpine.rsa.pub /etc/apk/keys/php-alpine.rsa.pub
@@ -44,8 +44,11 @@ RUN apk add --no-cache pcre-dev $PHPIZE_DEPS \
     && pecl install redis \
     && docker-php-ext-enable redis.so
 
-# add www-data to sudoers
-RUN echo "www-data ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers.d/www-data
+# Create user kubernetesuser
+RUN useradd -ms /bin/bash kubernetesuser -u 10001
+
+# add kubernetesuser to sudoers
+RUN echo "kubernetesuser ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers.d/kubernetesuser
 
 # CONFIGURE WEB SERVER.
 RUN mkdir -p /var/www && \
@@ -65,11 +68,7 @@ COPY config/nginx/site.conf /etc/nginx/sites-available/default.conf
 COPY config/php/php.ini /etc/php8.2/php.ini
 COPY config/php-fpm/www.conf /etc/php/8.2/fpm/pool.d/www.conf
 
-RUN chown -R www-data:www-data /etc/supervisord.conf && \
-    chown -R www-data:www-data /usr/bin/supervisord && \
-    chown -R www-data:www-data /usr/bin/composer
-
-USER www-data
+USER kubernetesuser
 
 # make the shell script on the root directory executable
 COPY start.sh /usr/local/bin/start.sh
@@ -83,8 +82,9 @@ EXPOSE ${NGINX_HTTPS_PORT} ${NGINX_HTTP_PORT}
 # SET THE WORK DIRECTORY.
 WORKDIR /var/www
 
-#GRANT PRIVILEGIES TO www-data user:group to read in /var/www
-RUN sudo chown -R www-data:www-data /var/www
+#GRANT PRIVILEGIES TO kubernetesuser user:group to read in /var/www
+RUN sudo chown -R kubernetesuser:kubernetesuser /var/www
 
 # Start script file
 CMD ["/usr/local/bin/start.sh"]
+
