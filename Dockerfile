@@ -85,6 +85,11 @@ WORKDIR /var/www
 #GRANT PRIVILEGIES TO kubernetesuser user:group to read in /var/www
 RUN sudo chown -R kubernetesuser:kubernetesuser /var/www
 
+COPY loadenv.sh /usr/local/bin/
+RUN sudo chmod +x /usr/local/bin/loadenv.sh
+
+# ENTRYPOINT
+ENTRYPOINT ["/usr/local/bin/loadenv.sh"]
 # Start script file
 CMD ["/usr/local/bin/start.sh"]
 
