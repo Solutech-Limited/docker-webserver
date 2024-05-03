@@ -5,10 +5,12 @@ if [[ "${LOAD_ENV}" == "1" ]]; then
     # replace environment variables
     # db variables
     sed -i "s/DB_HOST=/DB_HOST=$DB_HOST/g" .env
+    sed -i "s/DB_PORT=/DB_PORT=$DB_PORT/g" .env
     sed -i "s/DB_DATABASE=/DB_DATABASE=$DB_DATABASE/g" .env
     sed -i "s/DB_USERNAME=/DB_USERNAME=$DB_USERNAME/g" .env
     sed -i "s/DB_PASSWORD=/DB_PASSWORD=$DB_PASSWORD/g" .env
     # redis variables
+    sed -i "s/REDIS_CLIENT=/REDIS_CLIENT=$REDIS_CLIENT/g" .env
     sed -i "s/REDIS_HOST=/REDIS_HOST=$REDIS_HOST/g" .env
     sed -i "s/REDIS_PASSWORD=/REDIS_PASSWORD=$REDIS_PASSWORD/g" .env
     sed -i "s/REDIS_PORT=/REDIS_PORT=$REDIS_PORT/g" .env
