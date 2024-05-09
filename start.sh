@@ -20,8 +20,10 @@ if [[ "${LARAVEL_APP}" == "1" ]]; then
         cd ${WEBROOT}
         sudo php artisan migrate
         # run tenants migration
-        cd ${WEBROOT}
-        sudo php artisan tenants:migrate
+        if [[ "${RUN_TENANTS_MIGRATION}" == "1" ]]; then
+            cd ${WEBROOT}
+            sudo php artisan tenants:migrate
+        fi
         # clear opcache
         cd ${WEBROOT}
         sudo php -r "opcache_reset();"
