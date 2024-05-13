@@ -35,7 +35,9 @@ RUN apk add --no-cache --update \
     php-opcache \
     php-dom \
     shadow \
-    sudo
+    sudo \
+    zlib-dev \
+    zlib
 
 RUN docker-php-ext-install mysqli pdo pdo_mysql opcache gd
 
