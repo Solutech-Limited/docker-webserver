@@ -47,7 +47,7 @@ RUN apk add --no-cache --update \
     libzip-dev \
     libpng
 
-RUN docker-php-ext-install mysqli pdo pdo_mysql opcache gd
+RUN docker-php-ext-install mysqli pdo pdo_mysql opcache gd zip
 
 # install redis
 RUN apk add --no-cache pcre-dev $PHPIZE_DEPS \
