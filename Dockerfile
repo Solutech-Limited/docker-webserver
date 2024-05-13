@@ -37,7 +37,7 @@ RUN apk add --no-cache --update \
     shadow \
     sudo
 
-RUN docker-php-ext-install mysqli pdo pdo_mysql opcache
+RUN docker-php-ext-install mysqli pdo pdo_mysql opcache gd
 
 # install redis
 RUN apk add --no-cache pcre-dev $PHPIZE_DEPS \
