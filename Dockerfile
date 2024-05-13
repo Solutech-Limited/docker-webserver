@@ -38,6 +38,13 @@ RUN apk add --no-cache --update \
     sudo \
     zlib-dev \
     zlib \
+    libpng-dev \
+    libjpeg-turbo-dev \
+    freetype-dev \
+    libwebp-dev \
+    libxpm-dev \
+    libvpx-dev \
+    libzip-dev \
     libpng
 
 RUN docker-php-ext-install mysqli pdo pdo_mysql opcache gd
