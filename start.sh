@@ -24,6 +24,11 @@ if [[ "${LARAVEL_APP}" == "1" ]]; then
             cd ${WEBROOT}
             sudo php artisan tenants:migrate
         fi
+        # run admin archive migration
+        if [[ "${RUN_ADMIN_ARCHIVE_MIGRATION}" == "1" ]]; then
+            cd ${WEBROOT}
+            sudo php artisan migrate --path=database/migrations/archived_migrations
+        fi
         # clear opcache
         cd ${WEBROOT}
         sudo php -r "opcache_reset();"
