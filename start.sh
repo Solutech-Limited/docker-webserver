@@ -48,8 +48,10 @@ if [[ "${LARAVEL_APP}" == "1" ]]; then
         sudo crond
     fi
 
-    sudo chown -R www-data:www-data ${WEBROOT}/storage
-    sudo chown -R www-data:www-data ${WEBROOT}/bootstrap/cache
+    # laravel storage folder permissions
+    sudo chmod -R 777 ${WEBROOT}/storage
+    sudo chmod -R 777 ${WEBROOT}/storage/logs
+    sudo chmod -R 777 ${WEBROOT}/bootstrap/cache
 fi
 
 # SYMLINK CONFIGURATION FILES.
