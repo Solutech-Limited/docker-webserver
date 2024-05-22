@@ -47,6 +47,9 @@ if [[ "${LARAVEL_APP}" == "1" ]]; then
         sudo echo '* * * * * cd /var/www && sudo php artisan schedule:run >> /dev/null 2>&1' | sudo tee /etc/crontabs/kubernetesuser > /dev/null
         sudo crond
     fi
+
+    sudo chown -R www-data:www-data ${WEBROOT}/storage
+    sudo chown -R www-data:www-data ${WEBROOT}/bootstrap/cache
 fi
 
 # SYMLINK CONFIGURATION FILES.
