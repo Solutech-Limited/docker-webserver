@@ -49,12 +49,11 @@ if [[ "${LARAVEL_APP}" == "1" ]]; then
     fi
 fi
 
-# laravel storage folder permissions using acl
+# laravel storage folder permissions
 cd ${WEBROOT}
-sudo setfacl -Rm u:kubernetesuser:rwX,u:www-data:rwX storage/
-sudo setfacl -Rdm u:kubernetesuser:rwX,u:www-data:rwX storage/
-
-sudo getfacl storage/
+sudo chmod -R 777 storage
+sudo chmod -R 777 bootstrap/cache
+sudo chmod -R 777 storage/logs
 
 # SYMLINK CONFIGURATION FILES.
 sudo ln -s /etc/php8.2/php.ini /etc/php/8.2/fpm/php.ini
