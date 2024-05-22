@@ -47,13 +47,14 @@ if [[ "${LARAVEL_APP}" == "1" ]]; then
         sudo echo '* * * * * cd /var/www && sudo php artisan schedule:run >> /dev/null 2>&1' | sudo tee /etc/crontabs/kubernetesuser > /dev/null
         sudo crond
     fi
-
-    # laravel storage folder permissions using acl
-    sudo setfacl -Rm u:root:rwX,u:www-data:rwX ${WEBROOT}/storage/
-    sudo setfacl -Rdm u:root:rwX,u:www-data:rwX ${WEBROOT}/storage/
-
-    sudo getfacl ${WEBROOT}/storage/
 fi
+
+# laravel storage folder permissions using acl
+cd ${WEBROOT}
+sudo setfacl -Rm u:root:rwX,u:www-data:rwX storage/
+sudo setfacl -Rdm u:root:rwX,u:www-data:rwX storage/
+
+sudo getfacl storage/
 
 # SYMLINK CONFIGURATION FILES.
 sudo ln -s /etc/php8.2/php.ini /etc/php/8.2/fpm/php.ini
