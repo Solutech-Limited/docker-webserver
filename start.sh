@@ -48,10 +48,11 @@ if [[ "${LARAVEL_APP}" == "1" ]]; then
         sudo crond
     fi
 
-    # laravel storage folder permissions
-    sudo chmod -R 777 ${WEBROOT}/storage
-    sudo chmod -R 777 ${WEBROOT}/storage/logs
-    sudo chmod -R 777 ${WEBROOT}/bootstrap/cache
+    # laravel storage folder permissions using acl
+    sudo setfacl -Rm u:root:rwX,u:www-data:rwX ${WEBROOT}/storage/
+    sudo setfacl -Rdm u:root:rwX,u:www-data:rwX ${WEBROOT}/storage/
+
+    sudo getfacl ${WEBROOT}/storage/
 fi
 
 # SYMLINK CONFIGURATION FILES.
