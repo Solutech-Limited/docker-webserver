@@ -51,8 +51,8 @@ fi
 
 # laravel storage folder permissions
 cd ${WEBROOT}
-sudo setfacl -Rm u:kubernetesuser:rwX storage/
-sudo setfacl -Rdm u:kubernetesuser:rwX storage/
+sudo setfacl -Rm u:kubernetesuser:rwX,u:www-data:rwX storage/
+sudo setfacl -Rdm u:kubernetesuser:rwX,u:www-data:rwX storage/
 
 sudo getfacl storage/
 
