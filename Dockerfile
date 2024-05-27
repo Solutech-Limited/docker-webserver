@@ -10,7 +10,7 @@ LABEL maintainer="solutechlimited <info@solutech.co.ke>"
 ADD https://dl.bintray.com/php-alpine/key/php-alpine.rsa.pub /etc/apk/keys/php-alpine.rsa.pub
 
 # CONFIGURE ALPINE REPOSITORIES AND PHP BUILD DIR.
-FROM php:8.2-fpm-alpine
+FROM php:8.3-fpm-alpine
 
 # INSTALL SYSTEM PACKAGES PHP AND SOME EXTENSIONS. SEE: https://github.com/codecasts/php-alpine
 RUN apk add --no-cache --update \
