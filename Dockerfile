@@ -58,7 +58,6 @@ RUN apk add --no-cache pcre-dev $PHPIZE_DEPS \
 RUN useradd -ms /bin/bash kubernetesuser -u 10001
 
 # add kubernetesuser to sudoers
-    php-mbstring \
 RUN echo "kubernetesuser ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers.d/kubernetesuser
 
 # CONFIGURE WEB SERVER.
