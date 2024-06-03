@@ -55,20 +55,20 @@ sudo chmod -R 777 ${WEBROOT}/bootstrap/cache
 sudo chmod -R 777 ${WEBROOT}/storage/logs
 
 # SYMLINK CONFIGURATION FILES.
-sudo ln -s /etc/php8.2/php.ini /etc/php/8.2/fpm/php.ini
+sudo ln -s /etc/php8.3/php.ini /etc/php/8.3/fpm/php.ini
 sudo ln -s /etc/nginx/sites-available/default.conf /etc/nginx/sites-enabled/default.conf
 
 # PHP & SERVER CONFIGURATIONS.
 if [[ ! -z "${PHP_MEMORY_LIMIT}" ]]; then
-    sed -i "s/memory_limit = 128M/memory_limit = ${PHP_MEMORY_LIMIT}M/g" /etc/php/8.2/fpm/php.ini
+    sed -i "s/memory_limit = 128M/memory_limit = ${PHP_MEMORY_LIMIT}M/g" /etc/php/8.3/fpm/php.ini
 fi
 
 if [ ! -z "${PHP_POST_MAX_SIZE}" ]; then
-    sed -i "s/post_max_size = 50M/post_max_size = ${PHP_POST_MAX_SIZE}M/g" /etc/php/8.2/conf.d/php.ini
+    sed -i "s/post_max_size = 50M/post_max_size = ${PHP_POST_MAX_SIZE}M/g" /etc/php/8.3/conf.d/php.ini
 fi
 
 if [ ! -z "${PHP_UPLOAD_MAX_FILESIZE}" ]; then
-    sed -i "s/upload_max_filesize = 10M/upload_max_filesize = ${PHP_UPLOAD_MAX_FILESIZE}M/g" /etc/php/8.2/conf.d/php.ini
+    sed -i "s/upload_max_filesize = 10M/upload_max_filesize = ${PHP_UPLOAD_MAX_FILESIZE}M/g" /etc/php/8.3/conf.d/php.ini
 fi
 
 # START SUPERVISOR.
