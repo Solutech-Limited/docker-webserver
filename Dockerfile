@@ -45,9 +45,7 @@ RUN apk add --no-cache --update \
     libxpm-dev \
     libvpx-dev \
     libzip-dev \
-    libpng \
-    acl
-
+    libpng
 
 RUN docker-php-ext-install mysqli pdo pdo_mysql opcache gd zip
 
