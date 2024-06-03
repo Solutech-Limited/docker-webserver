@@ -38,7 +38,6 @@ if [[ "${LOAD_ENV}" == "1" ]]; then
     sed -i "s/SAT_CLIENT_ID=/SAT_CLIENT_ID=$SAT_CLIENT_ID/g" .env
     sed -i "s/SAT_CLIENT_SECRET=/SAT_CLIENT_SECRET=$SAT_CLIENT_SECRET/g" .env
     sed -i "s/SAT_LANDLORD_URL=/SAT_LANDLORD_URL=$SAT_LANDLORD_URL/g" .env
-    sed -i "s/SAT_CLIENT_AUTH_URL=/SAT_CLIENT_AUTH_URL=$SAT_CLIENT_AUTH_URL/g" .env
 fi
 
 # execute

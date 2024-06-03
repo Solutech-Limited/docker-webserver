@@ -50,10 +50,9 @@ if [[ "${LARAVEL_APP}" == "1" ]]; then
 fi
 
 # laravel storage folder permissions
-cd ${WEBROOT}
-sudo chmod -R 777 storage
-sudo chmod -R 777 bootstrap/cache
-sudo chmod -R 777 storage/logs
+sudo chmod -R 777 ${WEBROOT}/storage
+sudo chmod -R 777 ${WEBROOT}/bootstrap/cache
+sudo chmod -R 777 ${WEBROOT}/storage/logs
 
 # SYMLINK CONFIGURATION FILES.
 sudo ln -s /etc/php8.2/php.ini /etc/php/8.2/fpm/php.ini
