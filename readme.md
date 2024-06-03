@@ -1,6 +1,6 @@
 # Web Server
 
-Nginx & PHP 8.2 web server.
+Nginx & PHP 8.3 web server.
 
 # Laravel Application - Quick Run
 
@@ -17,7 +17,7 @@ Here are some args
 
 - `NGINX_HTTP_PORT` - HTTP port. Default: `80`.
 - `NGINX_HTTPS_PORT` - HTTPS port. Default: `443`.
-- `PHP_VERSION` - The PHP version to install. Supports: `>8.2`. Default: `8.2`.
+- `PHP_VERSION` - The PHP version to install. Supports: `>8.2`. Default: `8.3`.
 - `ALPINE_VERSION` - The Alpine version. Supports: `3.9`. Default: `3.9`.
 
 ### Environment Variables
