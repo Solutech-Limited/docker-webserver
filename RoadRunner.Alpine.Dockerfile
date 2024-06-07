@@ -97,7 +97,6 @@ RUN cp ${PHP_INI_DIR}/php.ini-production ${PHP_INI_DIR}/php.ini
 USER ${USER}
 
 COPY --link --chown=${USER}:${USER} --from=vendor /usr/bin/composer /usr/bin/composer
-COPY --link --chown=${USER}:${USER} composer.json composer.lock ./
 
 COPY --link --chown=${USER}:${USER} . .
 # COPY --link --chown=${USER}:${USER} --from=build ${ROOT}/public public
@@ -118,7 +117,7 @@ COPY --link --chown=${USER}:${USER} deployment/octane/RoadRunner/.rr.prod.yaml .
 COPY --link --chown=${USER}:${USER} deployment/start-container /usr/local/bin/start-container
 COPY --link --chown=${USER}:${USER} deployment/loadenv /usr/local/bin/loadenv
 
-RUN chmod +x rr /usr/local/bin/start-container /usr/local/bin/loadenv
+RUN chmod +x /usr/local/bin/start-container /usr/local/bin/loadenv
 
 RUN cat deployment/utilities.sh >> ~/.bashrc
 
