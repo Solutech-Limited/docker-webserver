@@ -1,37 +1,90 @@
-# Web Server
+# Laravel Octane Dockerfile
+<a href="/LICENSE"><img alt="License" src="https://img.shields.io/github/license/exaco/laravel-octane-dockerfile"></a>
+<a href="https://github.com/exaco/laravel-octane-dockerfile/releases"><img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/exaco/laravel-octane-dockerfile"></a>
+<a href="https://github.com/exaco/laravel-octane-dockerfile/pulls"><img alt="GitHub closed pull requests" src="https://img.shields.io/github/issues-pr-closed/exaco/laravel-octane-dockerfile"></a>
+<a href="https://github.com/exaco/laravel-octane-dockerfile/actions/workflows/tests.yml"><img alt="GitHub Workflow Status" src="https://github.com/exaco/laravel-octane-dockerfile/actions/workflows/roadrunner-test.yml/badge.svg"></a>
 
-Nginx & PHP 8.3 web server.
 
-# Laravel Application - Quick Run
+Production-ready Dockerfiles for [Laravel Octane](https://github.com/laravel/octane)
+powered web services and microservices.
 
-Using the Laravel installer you can get up and running with a Laravel application inside Docker in minutes.
+The Docker configuration provides the following setup:
 
-- Create a new Laravel application `$ laravel new testapp`
-- Change to the applications directory `$ cd testapp`
-- Start the container and attach the application. `$ docker run -d -p 4488:80 --name=testapp -v $PWD:/var/www solutechlimited/nginx-php-server:latest`
-- Visit the Docker container URL like [http://0.0.0.0:4488](http://0.0.0.0:4488). Profit!
+- PHP 8.2 and 8.3 official Debian-based and Alpine-based images
+- Preconfigured JIT compiler and OPcache
 
-### Args
+## Container modes
 
-Here are some args
+You can run the Docker container in different modes:
 
-- `NGINX_HTTP_PORT` - HTTP port. Default: `80`.
-- `NGINX_HTTPS_PORT` - HTTPS port. Default: `443`.
-- `PHP_VERSION` - The PHP version to install. Supports: `>8.2`. Default: `8.3`.
-- `ALPINE_VERSION` - The Alpine version. Supports: `3.9`. Default: `3.9`.
+| Mode                  | `CONTAINER_MODE` | HTTP server         |
+| --------------------- | ---------------- | ------------------- |
+| HTTP Server (default) | `http`           | FrankenPHP / Swoole / RoadRunner |
+| Scheduler             | `scheduler`      | -                   |
+| Worker                | `worker`         | -                   |
 
-### Environment Variables
+## Usage
 
-Here are some configurable environment values.
+### Building Docker image
+1. Clone this repository:
+```
+git clone --depth 1 git@github.com:exaco/laravel-octane-dockerfile.git
+```
+2. Copy cloned directory content including `deployment` directory, `Dockerfile`, and `.dockerignore` into your Octane powered Laravel project
+3. Change the directory to your Laravel project
+4. Build your image:
+```
+docker build -t <image-name>:<tag> -f <your-octane-driver>.Dockerfile .
+```
+### Running Docker container
 
-- `WEBROOT` – Path to the web root. Default: `/var/www`
-- `WEBROOT_PUBLIC` – Path to the web root. Default: `/var/www/public`
-- `COMPOSER_DIRECTORY` - Path to the `composer.json` containing directory. Default: `/var/www`.
-- `COMPOSER_INSTALL_ON_BUILD` - Should `composer install` run on build. Default: `0`.
-- `LARAVEL_APP` - Is this a Laravel application. Default `0`.
-- `RUN_LARAVEL_SCHEDULER` - Should the Laravel scheduler command run. Only works if `LARAVEL_APP` is `1`. Default: `0`.
-- `RUN_LARAVEL_MIGRATIONS_ON_BUILD` - Should the migrate command run during build. Only works if `LARAVEL_APP` is `1`. Default: `0`.
-- `PRODUCTION` – Is this a production environment. Default: `0`
-- `PHP_MEMORY_LIMIT` - PHP memory limit. Default: `128M`
-- `PHP_POST_MAX_SIZE` - Maximum POST size. Default: `50M`
-- `PHP_UPLOAD_MAX_FILESIZE` - Maximum file upload file. Default: `10M`.
+```bash
+# HTTP mode
+docker run -p <port>:8000 --rm <image-name>:<tag>
+
+# Horizon mode
+docker run -e CONTAINER_MODE=horizon --rm <image-name>:<tag>
+
+# Scheduler mode
+docker run -e CONTAINER_MODE=scheduler --rm <image-name>:<tag>
+
+# HTTP mode with Scheduler
+docker run -e WITH_SCHEDULER=true -p <port>:8000 --rm <image-name>:<tag>
+
+# Worker mode
+docker run -e CONTAINER_MODE=worker -e WORKER_COMMAND="php /var/www/html/artisan foo:bar" --rm <image-name>:<tag>
+
+# Running a single command
+docker run --rm <image-name>:<tag> php artisan about
+```
+
+## Utilities
+
+Also, some useful Bash functions and aliases are added in `utilities.sh` that maybe help.
+
+## Notes
+
+- Laravel Octane logs request information only in the `local` environment.
+- Please be aware of `.dockerignore` content
+
+## ToDo
+- [x] Add support for PHP 8.3
+- [x] Add support for worker mode
+- [ ] Build assets with Bun
+- [ ] Create standalone and self-executable app
+- [x] Add support for RoadRunner
+- [x] Add support for the full-stack apps (Front-end assets)
+- [ ] Add support `testing` environment and CI
+- [x] Add support for the Laravel scheduler
+- [ ] Add support for Laravel Dusk
+- [x] Support more PHP extensions
+- [x] Add tests
+- [x] Add Alpine-based images
+
+## Credits
+- [SMortexa](https://github.com/smortexa)
+- [All contributors](https://github.com/exaco/laravel-octane-dockerfile/graphs/contributors)
+
+## License
+
+This repository is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
