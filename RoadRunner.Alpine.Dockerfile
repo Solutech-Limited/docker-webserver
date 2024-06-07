@@ -118,18 +118,6 @@ COPY --link --chown=${USER}:${USER} deployment/octane/RoadRunner/.rr.prod.yaml .
 COPY --link --chown=${USER}:${USER} deployment/start-container /usr/local/bin/start-container
 COPY --link --chown=${USER}:${USER} deployment/loadenv /usr/local/bin/loadenv
 
-RUN composer install \
-    --classmap-authoritative \
-    --no-interaction \
-    --no-ansi \
-    --no-dev \
-    && composer clear-cache
-
-RUN if composer show | grep spiral/roadrunner-cli >/dev/null; then \
-    ./vendor/bin/rr get-binary --quiet; else \
-    echo "`spiral/roadrunner-cli` package is not installed. Exiting..."; exit 1; \
-    fi
-
 RUN chmod +x rr /usr/local/bin/start-container /usr/local/bin/loadenv
 
 RUN cat deployment/utilities.sh >> ~/.bashrc
