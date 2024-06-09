@@ -24,7 +24,7 @@ jobs:
     #   run: echo "tag=$(echo $GITHUB_REF | cut -d / -f 3)" >> $GITHUB_OUTPUT
 
     - name: Docker build
-      run: docker build -t ${{ secrets.DOCKER_USERNAME }}/octane-road-runner-server:1.0 -f RoadRunner.Alpine.Dockerfile .
+      run: docker build -t ${{ secrets.DOCKER_USERNAME }}/octane-road-runner-server:latest -f RoadRunner.Alpine.Dockerfile .
     
     - name: Docker push
-      run: docker push ${{ secrets.DOCKER_USERNAME }}/octane-road-runner-server:1.0
+      run: docker push ${{ secrets.DOCKER_USERNAME }}/octane-road-runner-server:latest
