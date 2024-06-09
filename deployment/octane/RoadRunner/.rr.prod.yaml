@@ -4,7 +4,7 @@ rpc:
 server:
   relay: pipes
 http:
-  middleware: [ "static", "gzip", "headers" ]
+  middleware: [ "static", "gzip", "headers", "http_metrics" ]
   max_request_size: 20
   static:
     dir: "public"
@@ -91,6 +91,8 @@ redis:
     # Optional section.
     # Default: false
     read_only: false
+metrics:
+  address: "127.0.0.1:2112"
 logs:
   mode: production
   level: debug
