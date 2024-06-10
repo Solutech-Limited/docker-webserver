@@ -21,6 +21,10 @@ initialStuff() {
         if [ -d "/var/www/html/database/migrations/archived_migrations" ]; then
             php artisan migrate --path=/database/migrations/archived_migrations --force;
         fi
+        echo "Running tenant migrations if the folder exists ..."
+        if [ -d "/var/www/html/database/migrations/tenant" ]; then
+            php artisan tenants:migrate --force;
+        fi
     fi
 }
 
