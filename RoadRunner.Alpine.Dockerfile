@@ -125,7 +125,7 @@ ENV LOAD_ENV=1
 
 EXPOSE 8000
 EXPOSE 6001
-EXPOSE 2112
+# EXPOSE 2112
 
 ENTRYPOINT ["loadenv", "start-container"]
 

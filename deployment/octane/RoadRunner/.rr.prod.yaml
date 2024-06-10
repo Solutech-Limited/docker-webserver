@@ -4,7 +4,6 @@ rpc:
 server:
   relay: pipes
 http:
-  access_logs: true
   middleware: [ "static", "gzip", "headers", "http_metrics" ]
   max_request_size: 20
   static:
@@ -18,8 +17,6 @@ http:
     supervisor:
       max_worker_memory: 128
       exec_ttl: 100s
-metrics:
-  address: "127.0.0.1:2112"
 logs:
   mode: production
   level: debug
