@@ -6,8 +6,6 @@ server:
 http:
   middleware: [ "static", "gzip", "headers", "http_metrics" ]
   max_request_size: 20
-  max_jobs: 10
-  max_memory_usage: 512M
   static:
     dir: "public"
     forbid: [ ".php", ".htaccess" ]
@@ -16,6 +14,7 @@ http:
   pool:
     allocate_timeout: 100s
     destroy_timeout: 100s
+    max_jobs: 10
     supervisor:
       max_worker_memory: 128
       exec_ttl: 100s
