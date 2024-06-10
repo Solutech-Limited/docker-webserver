@@ -16,14 +16,14 @@ initialStuff() {
 
     if [ ${running_migrations} = "true" ]; then
         echo "Running migrations ..."
-        php artisan migrate --force;
+        php artisan migrate;
         echo "Running archived migrations if the folder exists ..."
         if [ -d "/var/www/html/database/migrations/archived_migrations" ]; then
-            php artisan migrate --path=/database/migrations/archived_migrations --force;
+            php artisan migrate --path=/database/migrations/archived_migrations;
         fi
         echo "Running tenant migrations if the folder exists ..."
         if [ -d "/var/www/html/database/migrations/tenant" ]; then
-            php artisan tenants:migrate --force;
+            php artisan tenants:migrate;
         fi
     fi
 }
