@@ -16,7 +16,7 @@ initialStuff() {
 
     if [ ${running_migrations} = "true" ]; then
         echo "Running migrations ..."
-        php artisan migrate --isolated;
+        php artisan migrate --force;
         echo "Running archived migrations if the folder exists ..."
         if [ -d "/var/www/html/database/migrations/archived_migrations" ]; then
             php artisan migrate --path=/database/migrations/archived_migrations --force;
