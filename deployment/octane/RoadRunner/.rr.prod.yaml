@@ -2,6 +2,13 @@ version: '2.7'
 rpc:
   listen: 'tcp://127.0.0.1:6001'
 server:
+  command: "php otel_worker.php"
+  env:
+    - OTEL_SERVICE_NAME: php
+    - OTEL_TRACES_EXPORTER: otlp
+    - OTEL_EXPORTER_OTLP_PROTOCOL: http/protobuf
+    - OTEL_EXPORTER_OTLP_ENDPOINT: http://127.0.0.1:4318
+    - OTEL_PHP_TRACES_PROCESSOR: simple
   relay: pipes
 http:
   middleware: [ "static", "gzip", "headers", "http_metrics" ]
