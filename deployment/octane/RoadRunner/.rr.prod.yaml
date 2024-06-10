@@ -21,8 +21,12 @@ http:
 metrics:
   address: "127.0.0.1:2112"
 logs:
-  mode: production
-  level: debug
-  encoding: json
+  mode: development
+  file_logger_options:
+    log_output: "test_logs.log"
+    max_size: 10
+    max_age: 24
+    max_backups: 10
+    compress: true
 status:
     address: localhost:2114
