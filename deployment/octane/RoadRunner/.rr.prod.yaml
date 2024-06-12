@@ -39,7 +39,7 @@ http:
       # Default: ""
       password: ""
 metrics:
-  address: "127.0.0.1:2112"
+  address: "0.0.0.0:2112"
 logs:
   mode: production
   level: debug
