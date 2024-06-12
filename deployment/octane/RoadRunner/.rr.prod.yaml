@@ -18,6 +18,26 @@ http:
     supervisor:
       max_worker_memory: 128
       exec_ttl: 100s
+  kv:
+  # User defined name of the storage.
+  redis:
+    # Required section.
+    # Should be "redis" for the redis driver.
+    driver: redis
+
+    config:
+      # Optional section.
+      # By default, one connection will be specified with the "127.0.0.1:6379" value.
+      addrs:
+        - "REDIS_HOST:REDIS_PORT"
+
+      # Optional section.
+      # Default: ""
+      username: ""
+
+      # Optional section.
+      # Default: ""
+      password: ""
 metrics:
   address: "127.0.0.1:2112"
 logs:

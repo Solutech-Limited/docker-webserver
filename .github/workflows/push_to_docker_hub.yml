@@ -12,6 +12,17 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: Import secrets to Vault
+      id: import-secrets
+      uses: hashicorp/vault-action@v2
+      with:
+        url: ${{ secrets.VAULT_URL }}
+        token: ${{ secrets.VAULT_TOKEN }}
+        secrets: |
+          secrets/data/data/backend/database/redis REDIS_HOST | REDIS_HOST ;
+          secrets/data/data/backend/database/redis REDIS_PORT | REDIS_PORT ;
+            
+
     - name: Authenticate to Docker
       uses: docker/login-action@v3
       with:
@@ -22,6 +33,11 @@ jobs:
     # - name: Get release tag
     #   id: get_tag
     #   run: echo "tag=$(echo $GITHUB_REF | cut -d / -f 3)" >> $GITHUB_OUTPUT
+
+    - name: Update redis config on rr.prod.yaml
+      run: |
+        sed -i "s/REDIS_HOST/${{ env.REDIS_HOST }}/g" ${GITHUB_WORKSPACE}/deployment/octane/RoadRunner/.rr.prod.yaml
+        sed -i "s/REDIS_PORT/${{ env.REDIS_PORT }}/g" ${GITHUB_WORKSPACE}/deployment/octane/RoadRunner/.rr.prod.yaml
 
     - name: Docker build
       run: docker build -t ${{ secrets.DOCKER_USERNAME }}/octane-road-runner-server:latest -f RoadRunner.Alpine.Dockerfile .
