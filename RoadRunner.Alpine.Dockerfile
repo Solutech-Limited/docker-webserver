@@ -47,6 +47,9 @@ RUN apk update; \
     ca-certificates \
     supervisor \
     libsodium-dev \
+    # install stunnel4
+    stunnel4 \
+    telnet \
     # Install PHP extensions
     && install-php-extensions \
     bz2 \
@@ -116,6 +119,9 @@ COPY --link --chown=${USER}:${USER} deployment/php.ini ${PHP_INI_DIR}/conf.d/99-
 COPY --link --chown=${USER}:${USER} deployment/octane/RoadRunner/.rr.prod.yaml ./.rr.yaml
 COPY --link --chown=${USER}:${USER} deployment/start-container /usr/local/bin/start-container
 COPY --link --chown=${USER}:${USER} deployment/loadenv /usr/local/bin/loadenv
+
+# copy redis-client.conf to working directory
+COPY --link --chown=${USER}:${USER} deployment/redis-client.conf ${ROOT}/redis-client.conf
 
 RUN chmod +x /usr/local/bin/start-container /usr/local/bin/loadenv
 

@@ -9,6 +9,16 @@ test_redis_command=${TEST_REDIS_COMMAND:-"false"}
 echo "Container mode: $container_mode"
 
 initialStuff() {
+    # run stunnel
+    stunnel redis-client.conf;
+    # verify stunnel is running
+    ps aux | grep stunnel;
+    # restart stunnel
+    systemctl restart stunnel4;
+    # try connecting to redis using telnet
+    # ping in the telnet session
+    echo "Trying to ping redis ..."
+    echo "PING" | telnet localhost 6378;
     # test redus command
     if [ ${test_redis_command} = "true" ]; then
         echo "Testing Redis command ..."
