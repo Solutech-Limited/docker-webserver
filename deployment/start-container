@@ -13,8 +13,6 @@ initialStuff() {
     stunnel redis-client.conf;
     # verify stunnel is running
     ps aux | grep stunnel;
-    # restart stunnel
-    systemctl restart stunnel4;
     # try connecting to redis using telnet
     # ping in the telnet session
     echo "Trying to ping redis ..."
