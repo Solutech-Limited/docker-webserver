@@ -16,6 +16,10 @@ if [[ "${LOAD_ENV}" == "1" ]]; then
     sed -i "s/REDIS_PASSWORD=/REDIS_PASSWORD=$REDIS_PASSWORD/g" .env
     sed -i "s/REDIS_PORT=/REDIS_PORT=$REDIS_PORT/g" .env
     sed -i "s/REDIS_CERT_STRING=/REDIS_CERT_STRING=$REDIS_CERT_STRING/g" .env
+
+    # base64 decode redis cert string and create a new file - redis.pem
+    echo $REDIS_CERT_STRING | base64 -d > redis.pem
+
     # cloudflare variables
     sed -i "s/CLOUDFLARE_BASE_URL=/CLOUDFLARE_BASE_URL=$CLOUDFLARE_BASE_URL/g" .env
     sed -i "s/CLOUDFLARE_API_KEY=/CLOUDFLARE_API_KEY=$CLOUDFLARE_API_KEY/g" .env

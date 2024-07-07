@@ -65,11 +65,14 @@ RUN apk update; \
     igbinary \
     ldap \
     redis \
+    php-redis \
     && docker-php-source delete \
     && rm -rf /var/cache/apk/* /tmp/* /var/tmp/*
 
 # enable redis
-RUN docker-php-ext-enable redis.so
+RUN apk add --no-cache pcre-dev $PHPIZE_DEPS \
+    && pecl install redis \
+    && docker-php-ext-enable redis.so
 
 # RUN arch="$(apk --print-arch)" \
 #     && case "$arch" in \
