@@ -47,8 +47,8 @@ RUN apk update; \
     ca-certificates \
     supervisor \
     libsodium-dev \
-    # install stunnel4
-    stunnel4 \
+    # install stunnel4 and telnet
+    stunnel \
     telnet \
     # Install PHP extensions
     && install-php-extensions \
