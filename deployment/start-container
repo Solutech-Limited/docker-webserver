@@ -4,10 +4,17 @@ set -e
 container_mode=${CONTAINER_MODE:-"http"}
 octane_server=${OCTANE_SERVER}
 running_migrations=${RUNNING_MIGRATIONS:-"false"}
+test_redis_command=${TEST_REDIS_COMMAND:-"false"}
 
 echo "Container mode: $container_mode"
 
 initialStuff() {
+    # test redus command
+    if [ ${test_redis_command} = "true" ]; then
+        echo "Testing Redis command ..."
+        php artisan command:test-redis-command;
+    fi
+
     php artisan storage:link; \
     # php artisan optimize:clear; \
     php artisan event:cache; \
