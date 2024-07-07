@@ -65,7 +65,6 @@ RUN apk update; \
     igbinary \
     ldap \
     redis \
-    php-redis \
     && docker-php-source delete \
     && rm -rf /var/cache/apk/* /tmp/* /var/tmp/*
 
