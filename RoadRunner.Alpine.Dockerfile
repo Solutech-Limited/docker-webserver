@@ -49,7 +49,7 @@ RUN apk update; \
     libsodium-dev \
     # install stunnel4 and telnet
     stunnel \
-    telnet \
+    busybox-extras \
     # Install PHP extensions
     && install-php-extensions \
     bz2 \
