@@ -69,9 +69,7 @@ RUN apk update; \
     && rm -rf /var/cache/apk/* /tmp/* /var/tmp/*
 
 # enable redis
-RUN apk add --no-cache pcre-dev $PHPIZE_DEPS \
-    && pecl install redis \
-    && docker-php-ext-enable redis.so
+RUN docker-php-ext-enable redis.so
 
 # RUN arch="$(apk --print-arch)" \
 #     && case "$arch" in \
