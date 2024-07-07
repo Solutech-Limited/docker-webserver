@@ -40,7 +40,7 @@ jobs:
         sed -i "s/REDIS_PORT/${{ env.REDIS_PORT }}/g" ${GITHUB_WORKSPACE}/deployment/octane/RoadRunner/.rr.prod.yaml
 
     - name: Docker build
-      run: docker build -t ${{ secrets.DOCKER_USERNAME }}/octane-road-runner-server:latesttest -f RoadRunner.Alpine.Dockerfile .
+      run: docker build -t ${{ secrets.DOCKER_USERNAME }}/octane-road-runner-server:latest -f RoadRunner.Alpine.Dockerfile .
     
     - name: Docker push
-      run: docker push ${{ secrets.DOCKER_USERNAME }}/octane-road-runner-server:latesttest
+      run: docker push ${{ secrets.DOCKER_USERNAME }}/octane-road-runner-server:latest
