@@ -68,6 +68,9 @@ if [[ "${LOAD_ENV}" == "1" ]]; then
     sed -i "s/MAIL_PORT=/MAIL_PORT=$MAIL_PORT/g" .env
     sed -i "s/MAIL_USERNAME=/MAIL_USERNAME=$MAIL_USERNAME/g" .env
     sed -i "s/MAIL_PASSWORD=/MAIL_PASSWORD=$MAIL_PASSWORD/g" .env
+    sed -i "s/MAIL_ENCRYPTION=/MAIL_ENCRYPTION=$MAIL_ENCRYPTION/g" .env
+    sed -i "s/MAIL_FROM_ADDRESS=/MAIL_FROM_ADDRESS=$MAIL_FROM_ADDRESS/g" .env
+    sed -i "s/MAIL_FROM_NAME=/MAIL_FROM_NAME=$MAIL_FROM_NAME/g" .env
 fi
 
 # execute
