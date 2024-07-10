@@ -5,7 +5,6 @@ container_mode=${CONTAINER_MODE:-"http"}
 octane_server=${OCTANE_SERVER}
 running_migrations=${RUNNING_MIGRATIONS:-"false"}
 test_redis_command=${TEST_REDIS_COMMAND:-"false"}
-load_settings=${LOAD_SETTINGS:-"false"}
 
 echo "Container mode: $container_mode"
 
@@ -37,11 +36,6 @@ initialStuff() {
         if [ -d "/var/www/html/database/migrations/tenant" ]; then
             php artisan tenants:migrate;
         fi
-    fi
-
-    if [ ${load_settings} = "true" ]; then
-        echo "Loading settings ..."
-        php artisan command:load-settings
     fi
 }
 
