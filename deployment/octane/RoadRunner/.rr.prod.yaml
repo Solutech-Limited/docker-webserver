@@ -14,7 +14,7 @@ http:
   pool:
     allocate_timeout: 200s
     destroy_timeout: 200s
-    max_jobs: 100
+    max_jobs: 10
     supervisor:
       max_worker_memory: 128
       exec_ttl: 200s
