@@ -68,6 +68,8 @@ RUN apk update; \
     igbinary \
     ldap \
     redis \
+    # install rdkafka
+    rdkafka \
     && docker-php-source delete \
     && rm -rf /var/cache/apk/* /tmp/* /var/tmp/*
 
