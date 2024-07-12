@@ -9,12 +9,13 @@ test_redis_command=${TEST_REDIS_COMMAND:-"false"}
 echo "Container mode: $container_mode"
 
 initialStuff() {
-    # run stunnel
-    stunnel redis-client.conf;
-    # verify stunnel is running
-    ps aux | grep stunnel;
     # test redus command
     if [ ${test_redis_command} = "true" ]; then
+        # run stunnel
+        stunnel redis-client.conf;
+        # verify stunnel is running
+        ps aux | grep stunnel;
+        # test redis command
         echo "Testing Redis command ..."
         php artisan command:test-redis-command;
     fi
