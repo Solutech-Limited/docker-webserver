@@ -25,6 +25,7 @@ ENV TERM=xterm-color \
     COMPOSER_FUND=0 \
     COMPOSER_MAX_PARALLEL_HTTP=24 \
     RUNNING_MIGRATIONS=true
+    LOAD_SUPERCRONIC=false
 
 WORKDIR ${ROOT}
 
@@ -76,19 +77,20 @@ RUN apk update; \
 # enable redis
 RUN docker-php-ext-enable redis.so
 
-# RUN arch="$(apk --print-arch)" \
-#     && case "$arch" in \
-#     armhf) _cronic_fname='supercronic-linux-arm' ;; \
-#     aarch64) _cronic_fname='supercronic-linux-arm64' ;; \
-#     x86_64) _cronic_fname='supercronic-linux-amd64' ;; \
-#     x86) _cronic_fname='supercronic-linux-386' ;; \
-#     *) echo >&2 "error: unsupported architecture: $arch"; exit 1 ;; \
-#     esac \
-#     && wget -q "https://github.com/aptible/supercronic/releases/download/v0.2.29/${_cronic_fname}" \
-#     -O /usr/bin/supercronic \
-#     && chmod +x /usr/bin/supercronic \
-#     && mkdir -p /etc/supercronic \
-#     && echo "*/1 * * * * php ${ROOT}/artisan schedule:run --no-interaction" > /etc/supercronic/laravel
+if [ "$LOAD_SUPERCRONIC" = "true" ]; then
+    RUN arch="$(apk --print-arch)" \
+        && case "$arch" in \
+        armhf) _cronic_fname='supercronic-linux-arm' ;; \
+        aarch64) _cronic_fname='supercronic-linux-arm64' ;; \
+        x86_64) _cronic_fname='supercronic-linux-amd64' ;; \
+        x86) _cronic_fname='supercronic-linux-386' ;; \
+        *) echo >&2 "error: unsupported architecture: $arch"; exit 1 ;; \
+        esac \
+        && wget -q "https://github.com/aptible/supercronic/releases/download/v0.2.29/${_cronic_fname}" \
+        -O /usr/bin/supercronic \
+        && chmod +x /usr/bin/supercronic \
+        && mkdir -p /etc/supercronic \
+        && echo "*/1 * * * * php ${ROOT}/artisan schedule:run --no-interaction" > /etc/supercronic/laravel
 
 RUN addgroup -g ${WWWGROUP} ${USER} \
     && adduser -D -h ${ROOT} -G ${USER} -u ${WWWUSER} -s /bin/sh ${USER}
