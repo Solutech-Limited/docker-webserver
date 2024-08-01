@@ -1,0 +1,67 @@
+#!/usr/bin/env sh
+set -e
+
+container_mode=${CONTAINER_MODE:-"http"}
+octane_server=${OCTANE_SERVER}
+running_migrations=${RUNNING_MIGRATIONS:-"false"}
+test_redis_command=${TEST_REDIS_COMMAND:-"false"}
+
+echo "Container mode: $container_mode"
+
+initialStuff() {
+    # test redus command
+    if [ ${test_redis_command} = "true" ]; then
+        # run stunnel
+        stunnel redis-client.conf;
+        # verify stunnel is running
+        ps aux | grep stunnel;
+        # test redis command
+        echo "Testing Redis command ..."
+        php artisan command:test-redis-command;
+    fi
+
+    php artisan storage:link; \
+    # php artisan optimize:clear; \
+    php artisan event:cache; \
+    php artisan config:cache; \
+    # php artisan route:cache;
+
+    if [ ${running_migrations} = "true" ]; then
+        echo "Running migrations ..."
+        php artisan migrate;
+        echo "Running archived migrations if the folder exists ..."
+        if [ -d "/var/www/html/database/migrations/archived_migrations" ]; then
+            php artisan migrate --path=/database/migrations/archived_migrations;
+        fi
+        echo "Running tenant migrations if the folder exists ..."
+        if [ -d "/var/www/html/database/migrations/tenant" ]; then
+            php artisan tenants:migrate;
+        fi
+    fi
+}
+
+if [ "$1" != "" ]; then
+    exec "$@"
+elif [ ${container_mode} = "http" ]; then
+    echo "Octane Server: $octane_server"
+    initialStuff
+    if [ ${octane_server}  = "frankenphp" ]; then
+        exec /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.frankenphp.conf
+    elif [ ${octane_server}  = "swoole" ]; then
+        exec /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.swoole.conf
+    elif [ ${octane_server}  = "roadrunner" ]; then
+        exec /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.roadrunner.conf
+    else
+        echo "Invalid Octane server supplied."
+        exit 1
+    fi
+elif [ ${container_mode} = "scheduler" ]; then
+    initialStuff
+    exec /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.scheduler.conf
+elif [ ${container_mode} = "worker" ]; then
+    initialStuff
+    exec /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.worker.conf
+else
+    echo "Container mode mismatched."
+    exit 1
+fi
