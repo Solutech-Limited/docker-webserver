@@ -4,6 +4,7 @@ rpc:
 server:
   relay: pipes
 http:
+  access_logs: true
   middleware: [ "static", "gzip", "headers", "http_metrics" ]
   max_request_size: 100
   static:
