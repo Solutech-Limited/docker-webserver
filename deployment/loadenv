@@ -71,6 +71,10 @@ if [[ "${LOAD_ENV}" == "1" ]]; then
     sed -i "s/MAIL_ENCRYPTION=/MAIL_ENCRYPTION=$MAIL_ENCRYPTION/g" .env
     sed -i "s/MAIL_FROM_ADDRESS=/MAIL_FROM_ADDRESS=$MAIL_FROM_ADDRESS/g" .env
     sed -i "s/MAIL_FROM_NAME=/MAIL_FROM_NAME='$MAIL_FROM_NAME'/g" .env
+
+    # monitoring
+    sed -i "s/SENTRY_LARAVEL_DSN=/SENTRY_LARAVEL_DSN=$SENTRY_LARAVEL_DSN/g" .env
+
 fi
 
 # execute
