@@ -3,7 +3,7 @@ name: Push to docker hub
 on:
   push:
     branches:
-      - octane-server
+      - main
 
 jobs:
   build_and_push:
