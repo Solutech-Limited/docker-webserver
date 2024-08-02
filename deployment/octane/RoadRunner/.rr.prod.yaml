@@ -2,13 +2,6 @@ version: '3'
 rpc:
   listen: 'tcp://127.0.0.1:6001'
 server:
-  # open telemetry tracing
-  env:
-    - OTEL_SERVICE_NAME: php
-    - OTEL_TRACES_EXPORTER: otlp
-    - OTEL_EXPORTER_OTLP_PROTOCOL: http/protobuf
-    - OTEL_EXPORTER_OTLP_ENDPOINT: http://0.0.0.0:4318
-    - OTEL_PHP_TRACES_PROCESSOR: simple
   relay: pipes
 http:
   middleware: [ "static", "gzip", "headers", "http_metrics", "otel" ]
@@ -27,6 +20,16 @@ http:
       exec_ttl: 1h
 metrics:
   address: "0.0.0.0:2112"
+otel:
+  resource:
+    service_name: "rr_telemetry"
+    service_version: "1.0.0"
+    service_namespace: "RR-TELEMETRY"
+    service_instance_id: "UUID"
+  insecure: true
+  compress: false
+  exporter: otlp
+  endpoint: 127.0.0.1:4317
 logs:
   mode: production
   level: debug
