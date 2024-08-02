@@ -21,6 +21,18 @@ http:
       exec_ttl: 1h
 metrics:
   address: "0.0.0.0:2112"
+  collect:
+    http:
+      request_duration_seconds:
+        buckets: [0.05, 0.1, 0.3, 1.2, 5.0]
+    memory:
+      enabled: true
+    cpu:
+      enabled: true
+    gc:
+      enabled: true
+    go_routines:
+      enabled: true
 logs:
   mode: production
   level: debug
