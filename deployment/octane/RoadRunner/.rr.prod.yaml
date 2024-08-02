@@ -2,9 +2,16 @@ version: '3'
 rpc:
   listen: 'tcp://127.0.0.1:6001'
 server:
+  # open telemetry tracing
+  env:
+    - OTEL_SERVICE_NAME: php
+    - OTEL_TRACES_EXPORTER: otlp
+    - OTEL_EXPORTER_OTLP_PROTOCOL: http/protobuf
+    - OTEL_EXPORTER_OTLP_ENDPOINT: http://0.0.0.0:4318
+    - OTEL_PHP_TRACES_PROCESSOR: simple
   relay: pipes
 http:
-  middleware: [ "static", "gzip", "headers", "http_metrics" ]
+  middleware: [ "static", "gzip", "headers", "http_metrics", "otel" ]
   max_request_size: 100
   static:
     dir: "public"
