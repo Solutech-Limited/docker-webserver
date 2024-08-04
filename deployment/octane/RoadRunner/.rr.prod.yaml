@@ -4,8 +4,9 @@ rpc:
 server:
   relay: pipes
 http:
-  middleware: [ "static", "gzip", "headers", "http_metrics", "otel" ]
+  middleware: [ "static", "gzip", "headers", "http_metrics" ]
   max_request_size: 100
+  access_logs: true
   static:
     dir: "public"
     forbid: [ ".php", ".htaccess" ]
@@ -20,19 +21,14 @@ http:
       exec_ttl: 1h
 metrics:
   address: "0.0.0.0:2112"
-otel:
-  resource:
-    service_name: "rr_telemetry"
-    service_version: "1.0.0"
-    service_namespace: "RR-TELEMETRY"
-    service_instance_id: "UUID"
-  insecure: true
-  compress: false
-  exporter: otlp
-  endpoint: 127.0.0.1:4317
 logs:
   mode: production
   level: debug
-  encoding: console
+  channels:
+    http:
+      file_logger_options:
+        log_output: "/var/log/containers/http.log"
+        max_age: 24
+        compress: true
 status:
     address: localhost:2114
