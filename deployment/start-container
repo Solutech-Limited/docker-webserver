@@ -8,10 +8,6 @@ test_redis_command=${TEST_REDIS_COMMAND:-"false"}
 
 echo "Container mode: $container_mode"
 
-# create /var/log/containers directory and set chmod 777 permissions
-mkdir -p /var/log/containers
-chmod -R 777 /var/log/containers
-
 initialStuff() {
     # test redus command
     if [ ${test_redis_command} = "true" ]; then
