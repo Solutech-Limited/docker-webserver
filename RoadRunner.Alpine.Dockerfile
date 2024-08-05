@@ -114,6 +114,9 @@ RUN mkdir -p \
     storage/logs \
     bootstrap/cache && chmod -R a+rw storage
 
+# create /var/log/containers directory and set chmod 777 permissions
+RUN mkdir -p /var/log/containers && chmod -R 777 /var/log/containers
+
 COPY --link --chown=${USER}:${USER} deployment/supervisord.conf /etc/supervisor/
 COPY --link --chown=${USER}:${USER} deployment/octane/RoadRunner/supervisord.roadrunner.conf /etc/supervisor/conf.d/
 COPY --link --chown=${USER}:${USER} deployment/supervisord.*.conf /etc/supervisor/conf.d/
