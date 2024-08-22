@@ -5,7 +5,7 @@ server:
   relay: pipes
 http:
   middleware: [ "static", "gzip", "headers", "http_metrics" ]
-  max_request_size: 100
+  max_request_size: 256
   access_logs: true
   static:
     dir: "public"
@@ -15,9 +15,11 @@ http:
   pool:
     allocate_timeout: 1h
     destroy_timeout: 1h
+    num_workers: 0
     max_jobs: 0
+    max_queue_size: 0
     supervisor:
-      max_worker_memory: 128
+      max_worker_memory: 0
       exec_ttl: 1h
 metrics:
   address: "0.0.0.0:2112"
