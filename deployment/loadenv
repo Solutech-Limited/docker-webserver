@@ -91,6 +91,11 @@ if [[ "${LOAD_ENV}" == "1" ]]; then
     # create a new file - google-cloud.json
     echo $FIREBASE_CREDENTIALS | base64 -d > fcmaccount.json
 
+    # zoho credentials
+    sed -i "s/ZOHO_CLIENT_ID=/ZOHO_CLIENT_ID=$ZOHO_CLIENT_ID/g" .env
+    sed -i "s/ZOHO_CLIENT_SECRET=/ZOHO_CLIENT_SECRET=$ZOHO_CLIENT_SECRET/g" .env
+    sed -i "s/ZOHO_ORGANIZATION_ID=/ZOHO_ORGANIZATION_ID=$ZOHO_ORGANIZATION_ID/g" .env
+
 fi
 
 # execute
