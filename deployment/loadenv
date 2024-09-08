@@ -80,6 +80,22 @@ if [[ "${LOAD_ENV}" == "1" ]]; then
     sed -i "s/MIGRATION_SERVICE_CLIENT_SECRET=/MIGRATION_SERVICE_CLIENT_SECRET=$MIGRATION_SERVICE_CLIENT_SECRET/g" .env
     sed -i "s/MIGRATION_SERVICE_CLIENT_ENDPOINT=/MIGRATION_SERVICE_CLIENT_ENDPOINT=$MIGRATION_SERVICE_CLIENT_ENDPOINT/g" .env
 
+    # tiarra sms variables
+    sed -i "s/TIARRA_SENDER_ID=/TIARRA_SENDER_ID=$TIARRA_SENDER_ID/g" .env
+    sed -i "s/TIARRA_API_KEY=/TIARRA_API_KEY=$TIARRA_API_KEY/g" .env
+    sed -i "s/TIARRA_ENDPOINT=/TIARRA_ENDPOINT=$TIARRA_ENDPOINT/g" .env
+
+    # firebase cloud messaging variables
+    sed -i "s/FIREBASE_DATABASE_URL=/FIREBASE_DATABASE_URL=$FIREBASE_DATABASE_URL/g" .env
+
+    # create a new file - google-cloud.json
+    echo $FIREBASE_CREDENTIALS | base64 -d > fcmaccount.json
+
+    # zoho credentials
+    sed -i "s/ZOHO_CLIENT_ID=/ZOHO_CLIENT_ID=$ZOHO_CLIENT_ID/g" .env
+    sed -i "s/ZOHO_CLIENT_SECRET=/ZOHO_CLIENT_SECRET=$ZOHO_CLIENT_SECRET/g" .env
+    sed -i "s/ZOHO_ORGANIZATION_ID=/ZOHO_ORGANIZATION_ID=$ZOHO_ORGANIZATION_ID/g" .env
+
 fi
 
 # execute
