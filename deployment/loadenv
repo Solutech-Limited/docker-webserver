@@ -96,6 +96,10 @@ if [[ "${LOAD_ENV}" == "1" ]]; then
     sed -i "s/ZOHO_CLIENT_SECRET=/ZOHO_CLIENT_SECRET=$ZOHO_CLIENT_SECRET/g" .env
     sed -i "s/ZOHO_ORGANIZATION_ID=/ZOHO_ORGANIZATION_ID=$ZOHO_ORGANIZATION_ID/g" .env
 
+    # maps credentials
+    sed -i "s/MAPS_API_KEY=/MAPS_API_KEY=$MAPS_API_KEY/g" .env
+    sed -i "s/MAPS_URL=/MAPS_URL=$MAPS_URL/g" .env
+
 fi
 
 # execute
