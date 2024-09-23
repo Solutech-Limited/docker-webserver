@@ -10,6 +10,8 @@ if [[ "${LOAD_ENV}" == "1" ]]; then
     sed -i "s/DB_DATABASE=/DB_DATABASE=$DB_DATABASE/g" .env
     sed -i "s/DB_USERNAME=/DB_USERNAME=$DB_USERNAME/g" .env
     sed -i "s/DB_PASSWORD=/DB_PASSWORD=$DB_PASSWORD/g" .env
+    # encryption key
+    sed -i "s/INTEGRATION_ENCRYPTION_KEY=/INTEGRATION_ENCRYPTION_KEY=$INTEGRATION_ENCRYPTION_KEY/g" .env
     # redis variables
     sed -i "s/REDIS_CLIENT=/REDIS_CLIENT=$REDIS_CLIENT/g" .env
     sed -i "s/REDIS_HOST=/REDIS_HOST=$REDIS_HOST/g" .env
