@@ -13,15 +13,13 @@ http:
   uploads:
     forbid: [".php", ".exe", ".bat", ".sh"]
   pool:
-    allocate_timeout: 600s
-    destroy_timeout: 600s
+    allocate_timeout: 1800s
+    destroy_timeout: 1800s
     num_workers: 0
     max_queue_size: 0
     supervisor:
       max_worker_memory: 0
-      exec_ttl: 600s
-      idle_ttl: 10s
-      watch_tick: 1s
+      exec_ttl: 1800s
 metrics:
   address: "0.0.0.0:2112"
 logs:
