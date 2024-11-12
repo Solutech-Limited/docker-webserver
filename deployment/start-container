@@ -58,3 +58,8 @@ elif [ ${container_mode} = "http" ]; then
         echo "Invalid Octane server supplied."
         exit 1
     fi
+else
+    echo "Invalid container mode supplied."
+    exit 1
+fi
+
