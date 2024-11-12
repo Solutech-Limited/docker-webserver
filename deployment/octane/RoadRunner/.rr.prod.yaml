@@ -2,6 +2,8 @@ version: '3'
 rpc:
   listen: 'tcp://127.0.0.1:6001'
 server:
+  on_init:
+    command: "php artisan horizon"
   relay: pipes
 http:
   middleware: [ "static", "gzip", "headers", "http_metrics" ]
