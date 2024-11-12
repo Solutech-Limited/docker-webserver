@@ -15,10 +15,10 @@ http:
   pool:
     allocate_timeout: 1h
     destroy_timeout: 1h
-    num_workers: 0
+    num_workers: 6
     max_queue_size: 0
     supervisor:
-      max_worker_memory: 0
+      max_worker_memory: 256
       exec_ttl: 1h
 metrics:
   address: "0.0.0.0:2112"
