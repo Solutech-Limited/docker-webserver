@@ -125,9 +125,6 @@ COPY --link --chown=${USER}:${USER} deployment/octane/RoadRunner/.rr.prod.yaml .
 COPY --link --chown=${USER}:${USER} deployment/start-container /usr/local/bin/start-container
 COPY --link --chown=${USER}:${USER} deployment/loadenv /usr/local/bin/loadenv
 
-# COPY Horizon configuration
-COPY --link --chown=${USER}:${USER} deployment/octane/RoadRunner/horizon.service /var/www/html/horizon.service
-
 # copy redis-client.conf to working directory
 COPY --link --chown=${USER}:${USER} deployment/redis-client.conf ${ROOT}/redis-client.conf
 
