@@ -13,7 +13,6 @@ http:
   uploads:
     forbid: [".php", ".exe", ".bat", ".sh"]
   pool:
-    command: "php artisan horizon"
     allocate_timeout: 1h
     destroy_timeout: 1h
     num_workers: 0
@@ -21,12 +20,6 @@ http:
     supervisor:
       max_worker_memory: 0
       exec_ttl: 1h
-workers:
-  command: "php artisan queue:work --tries=3"
-  pool:
-    num_workers: 0
-    max_jobs: 0
-    max_memory: 0
 metrics:
   address: "0.0.0.0:2112"
 logs:
