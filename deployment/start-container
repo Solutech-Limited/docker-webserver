@@ -53,6 +53,7 @@ elif [ ${container_mode} = "http" ]; then
     elif [ ${octane_server}  = "swoole" ]; then
         exec /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.swoole.conf
     elif [ ${octane_server}  = "roadrunner" ]; then
+        systemctl enable horizon.service
         systemctl daemon-reload
         systemctl start horizon.service
         php artisan octane:start --server=roadrunner --host=0.0.0.0 --port=8000 --rpc-port=6001 --rr-config=.rr.yaml
