@@ -53,7 +53,7 @@ elif [ ${container_mode} = "http" ]; then
     elif [ ${octane_server}  = "swoole" ]; then
         exec /usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.swoole.conf
     elif [ ${octane_server}  = "roadrunner" ]; then
-        php artisan horizon &
+        php artisan queue:work --tries=3 --timeout=90 --daemon &
         exec php artisan octane:start --server=roadrunner --host=0.0.0.0 --port=8000 --rpc-port=6001 --rr-config=.rr.yaml
     else
         echo "Invalid Octane server supplied."
