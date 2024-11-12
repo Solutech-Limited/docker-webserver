@@ -123,12 +123,13 @@ COPY --link --chown=${USER}:${USER} deployment/supervisord.*.conf /etc/superviso
 COPY --link --chown=${USER}:${USER} deployment/php.ini ${PHP_INI_DIR}/conf.d/99-octane.ini
 COPY --link --chown=${USER}:${USER} deployment/octane/RoadRunner/.rr.prod.yaml ./.rr.yaml
 COPY --link --chown=${USER}:${USER} deployment/start-container /usr/local/bin/start-container
+COPY --link --chown=${USER}:${USER} deployment/start-supervisor /usr/local/bin/start-supervisor
 COPY --link --chown=${USER}:${USER} deployment/loadenv /usr/local/bin/loadenv
 
 # copy redis-client.conf to working directory
 COPY --link --chown=${USER}:${USER} deployment/redis-client.conf ${ROOT}/redis-client.conf
 
-RUN chmod +x /usr/local/bin/start-container /usr/local/bin/loadenv
+RUN chmod +x /usr/local/bin/start-container /usr/local/bin/loadenv /usr/local/bin/start-supervisor
 
 RUN cat deployment/utilities.sh >> ~/.bashrc
 
@@ -139,6 +140,6 @@ EXPOSE 6001
 EXPOSE 2112
 EXPOSE 4318
 
-ENTRYPOINT ["loadenv", "start-container", "/usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.roadrunner.conf"]
+ENTRYPOINT ["loadenv", "start-container", "start-supervisor"]
 
 HEALTHCHECK --start-period=5s --interval=2s --timeout=100s --retries=8 CMD php artisan octane:status || exit 1
