@@ -2,6 +2,8 @@ version: '3'
 rpc:
   listen: 'tcp://127.0.0.1:6001'
 server:
+  on_init:
+    command: "php artisan horizon"
   relay: pipes
 http:
   middleware: [ "static", "gzip", "headers", "http_metrics" ]
@@ -31,21 +33,5 @@ logs:
         log_output: "/var/log/containers/http.log"
         max_age: 24
         compress: true
-
-# run php artisan horizon as a separate worker
-workers:
-  default:
-    command: "php artisan horizon"
-    relay: pipes
-    pool:
-      num_workers: 1
-      max_jobs: 100
-      max_memory: 128M
-      allocate_timeout: 1h
-      destroy_timeout: 1h
-      supervisor:
-        max_worker_memory: 0
-        exec_ttl: 1h
-
 status:
     address: localhost:2114
