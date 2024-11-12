@@ -123,13 +123,12 @@ COPY --link --chown=${USER}:${USER} deployment/supervisord.*.conf /etc/superviso
 COPY --link --chown=${USER}:${USER} deployment/php.ini ${PHP_INI_DIR}/conf.d/99-octane.ini
 COPY --link --chown=${USER}:${USER} deployment/octane/RoadRunner/.rr.prod.yaml ./.rr.yaml
 COPY --link --chown=${USER}:${USER} deployment/start-container /usr/local/bin/start-container
-COPY --link --chown=${USER}:${USER} deployment/start-supervisor /usr/local/bin/start-supervisor
 COPY --link --chown=${USER}:${USER} deployment/loadenv /usr/local/bin/loadenv
 
 # copy redis-client.conf to working directory
 COPY --link --chown=${USER}:${USER} deployment/redis-client.conf ${ROOT}/redis-client.conf
 
-RUN chmod +x /usr/local/bin/start-container /usr/local/bin/loadenv /usr/local/bin/start-supervisor
+RUN chmod +x /usr/local/bin/start-container /usr/local/bin/loadenv
 
 RUN cat deployment/utilities.sh >> ~/.bashrc
 
