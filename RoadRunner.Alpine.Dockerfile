@@ -139,6 +139,6 @@ EXPOSE 6001
 EXPOSE 2112
 EXPOSE 4318
 
-ENTRYPOINT ["loadenv", "start-container", "/usr/bin/supervisord"]
+ENTRYPOINT ["loadenv", "start-container", "/usr/bin/supervisord -c /etc/supervisor/conf.d/supervisord.roadrunner.conf"]
 
 HEALTHCHECK --start-period=5s --interval=2s --timeout=100s --retries=8 CMD php artisan octane:status || exit 1
