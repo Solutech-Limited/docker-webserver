@@ -70,6 +70,8 @@ RUN apk update; \
     redis \
     # install rdkafka
     rdkafka \
+    # install imagick
+    imagick \
     && docker-php-source delete \
     && rm -rf /var/cache/apk/* /tmp/* /var/tmp/*
 
