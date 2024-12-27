@@ -111,6 +111,17 @@ if [[ "${LOAD_ENV}" == "1" ]]; then
     # google calendar variables
     sed -i "s/GOOGLE_API_KEY=/GOOGLE_API_KEY=$GOOGLE_API_KEY/g" .env
 
+    # eva url
+    sed -i "s/EVA_LPO_URL=/EVA_LPO_URL=$EVA_LPO_URL/g" .env
+
+    # azure credentials
+    sed -i "s/AZURE_TENANT_ID=/AZURE_TENANT_ID=$AZURE_TENANT_ID/g" .env
+    sed -i "s/AZURE_CLIENT_ID=/AZURE_CLIENT_ID=$AZURE_CLIENT_ID/g" .env
+    sed -i "s/AZURE_CLIENT_SECRET=/AZURE_CLIENT_SECRET=$AZURE_CLIENT_SECRET/g" .env
+    sed -i "s/AZURE_REDIRECT_URI=/AZURE_REDIRECT_URI=$AZURE_REDIRECT_URI/g" .env
+    sed -i "s/AZURE_LPO_READER_EMAIL=/AZURE_LPO_READER_EMAIL=$AZURE_LPO_READER_EMAIL/g" .env
+    sed -i "s/AZURE_SCOPE=/AZURE_SCOPE=$AZURE_SCOPE/g" .env
+
 fi
 
 # execute
