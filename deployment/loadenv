@@ -113,6 +113,7 @@ if [[ "${LOAD_ENV}" == "1" ]]; then
 
     # eva url
     sed -i "s/EVA_LPO_URL=/EVA_LPO_URL=$EVA_LPO_URL/g" .env
+    sed -i "s/SINGLE_ROUTE_OPTIMIZATION_LINK=/SINGLE_ROUTE_OPTIMIZATION_LINK=$SINGLE_ROUTE_OPTIMIZATION_LINK/g" .env
 
     # azure credentials
     sed -i "s/AZURE_TENANT_ID=/AZURE_TENANT_ID=$AZURE_TENANT_ID/g" .env
