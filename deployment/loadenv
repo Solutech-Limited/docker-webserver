@@ -123,6 +123,10 @@ if [[ "${LOAD_ENV}" == "1" ]]; then
     sed -i "s/AZURE_LPO_READER_EMAIL=/AZURE_LPO_READER_EMAIL=$AZURE_LPO_READER_EMAIL/g" .env
     sed -i "s/AZURE_SCOPE=/AZURE_SCOPE=$AZURE_SCOPE/g" .env
 
+    # search credentials
+    sed -i "s/ALGOLIA_APP_ID=/ALGOLIA_APP_ID=$ALGOLIA_APP_ID/g" .env
+    sed -i "s/ALGOLIA_APP_SECRET=/ALGOLIA_APP_SECRET=$ALGOLIA_APP_SECRET/g" .env
+
 fi
 
 # execute
