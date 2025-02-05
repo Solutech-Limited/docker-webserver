@@ -43,7 +43,7 @@ initialStuff() {
     fi
 
     # generate docs
-    php artisan scramble:export
+    php artisan scramble:custom-export
 }
 
 if [ "$1" != "" ]; then
