@@ -75,6 +75,9 @@ RUN apk update; \
     && docker-php-source delete \
     && rm -rf /var/cache/apk/* /tmp/* /var/tmp/*
 
+# add a policy to ImageMagick policy file
+RUN sed -i 's|pattern="{GIF,JPEG,PNG,WEBP}"|pattern="{GIF,JPEG,PNG,WEBP,PDF}"|' /etc/ImageMagick-*/policy.xml
+
 # enable redis
 RUN docker-php-ext-enable redis.so
 
@@ -133,10 +136,6 @@ COPY --link --chown=${USER}:${USER} deployment/redis-client.conf ${ROOT}/redis-c
 RUN chmod +x /usr/local/bin/start-container /usr/local/bin/loadenv
 
 RUN cat deployment/utilities.sh >> ~/.bashrc
-
-# add a policy to ImageMagick policy file
-RUN chmod 644 /etc/ImageMagick-*/policy.xml
-RUN sed -i 's|pattern="{GIF,JPEG,PNG,WEBP}"|pattern="{GIF,JPEG,PNG,WEBP,PDF}"|' /etc/ImageMagick-*/policy.xml
 
 ENV LOAD_ENV=1
 
