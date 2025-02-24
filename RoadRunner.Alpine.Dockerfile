@@ -134,6 +134,9 @@ RUN chmod +x /usr/local/bin/start-container /usr/local/bin/loadenv
 
 RUN cat deployment/utilities.sh >> ~/.bashrc
 
+# add a policy to ImageMagick policy file
+RUN sed -i 's|<policy domain="coder" rights="none" pattern="PDF" />|<policy domain="coder" rights="read | write" pattern="PDF" />|' /etc/ImageMagick-*/policy.xml
+
 ENV LOAD_ENV=1
 
 EXPOSE 8000
