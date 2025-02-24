@@ -135,7 +135,7 @@ RUN chmod +x /usr/local/bin/start-container /usr/local/bin/loadenv
 RUN cat deployment/utilities.sh >> ~/.bashrc
 
 # add a policy to ImageMagick policy file
-RUN chown -R ${USER}:${USER} /etc/ImageMagick-*/policy.xml
+RUN chmod 644 /etc/ImageMagick-*/policy.xml
 RUN sed -i 's|pattern="{GIF,JPEG,PNG,WEBP}"|pattern="{GIF,JPEG,PNG,WEBP,PDF}"|' /etc/ImageMagick-*/policy.xml
 
 ENV LOAD_ENV=1
