@@ -41,9 +41,6 @@ initialStuff() {
             php artisan tenants:migrate;
         fi
     fi
-
-    # generate docs
-    php artisan scramble:custom-export
 }
 
 if [ "$1" != "" ]; then
