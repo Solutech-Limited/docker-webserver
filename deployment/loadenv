@@ -64,6 +64,8 @@ if [[ "${LOAD_ENV}" == "1" ]]; then
     sed -i "s/GOOGLE_CLOUD_STORAGE_API_ENDPOINT=/GOOGLE_CLOUD_STORAGE_API_ENDPOINT=$GOOGLE_CLOUD_STORAGE_API_ENDPOINT/g" .env
 
     sed -i "s/GOOGLE_CLOUD_BUCKET_URL=/GOOGLE_CLOUD_BUCKET_URL=$GOOGLE_CLOUD_BUCKET_URL/g" .env
+    
+    sed -i "s/GOOGLE_BIGQUERY_PROJECT_ID=/GOOGLE_BIGQUERY_PROJECT_ID=$GOOGLE_BIGQUERY_PROJECT_ID/g" .env
 
     # mail
     sed -i "s/MAIL_HOST=/MAIL_HOST=$MAIL_HOST/g" .env
@@ -96,6 +98,9 @@ if [[ "${LOAD_ENV}" == "1" ]]; then
     # create a new file - google-cloud.json
     echo $FIREBASE_CREDENTIALS | base64 -d > fcmaccount.json
 
+    # create a new file - google-bigquery.json
+    echo $GOOGLE_BIGQUERY_APPLICATION_CREDENTIALS | base64 -d > googlebigqueryaccount.json
+
     # zoho credentials
     sed -i "s/ZOHO_CLIENT_ID=/ZOHO_CLIENT_ID=$ZOHO_CLIENT_ID/g" .env
     sed -i "s/ZOHO_CLIENT_SECRET=/ZOHO_CLIENT_SECRET=$ZOHO_CLIENT_SECRET/g" .env
@@ -126,6 +131,9 @@ if [[ "${LOAD_ENV}" == "1" ]]; then
     # search credentials
     sed -i "s/ALGOLIA_APP_ID=/ALGOLIA_APP_ID=$ALGOLIA_APP_ID/g" .env
     sed -i "s/ALGOLIA_APP_SECRET=/ALGOLIA_APP_SECRET=$ALGOLIA_APP_SECRET/g" .env
+
+    # bigquery project id
+    sed -i "s/GOOGLE_BIGQUERY_PROJECT_ID=/GOOGLE_BIGQUERY_PROJECT_ID=$GOOGLE_BIGQUERY_PROJECT_ID/g" .env
 
 fi
 
