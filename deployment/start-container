@@ -26,9 +26,6 @@ initialStuff() {
     php artisan config:cache; \
     # php artisan route:cache;
 
-    # display all scheduled tasks
-    php artisan schedule:list;
-
     if [ ${running_migrations} = "true" ]; then
         echo "Running migrations ..."
         php artisan migrate;
@@ -41,6 +38,9 @@ initialStuff() {
             php artisan tenants:migrate;
         fi
     fi
+
+    # display all scheduled tasks
+    php artisan schedule:list;
 }
 
 if [ "$1" != "" ]; then
