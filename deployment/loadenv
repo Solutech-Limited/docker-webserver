@@ -3,6 +3,8 @@ set -e
 
 if [[ "${LOAD_ENV}" == "1" ]]; then
     cp .env.example .env
+    # allow all permissions on storage/logs folder
+    chmod -R 777 storage/logs
     # replace environment variables
     # db variables
     sed -i "s/DB_HOST=/DB_HOST=$DB_HOST/g" .env
