@@ -28,7 +28,7 @@ logs:
   channels:
     http:
       file_logger_options:
-        log_output: "/var/log/containers/http.log"
+        log_output: "/var/www/html/storage/logs/http.log"
         max_age: 24
         compress: true
 status:
