@@ -22,14 +22,14 @@ http:
       exec_ttl: 1h
 metrics:
   address: "0.0.0.0:2112"
-# logs:
-#   mode: production
-#   level: debug
-#   channels:
-#     http:
-#       file_logger_options:
-#         log_output: "/var/log/containers/http.log"
-#         max_age: 24
-#         compress: true
+logs:
+  mode: production
+  level: debug
+  channels:
+    http:
+      file_logger_options:
+        log_output: "/var/log/containers/http.log"
+        max_age: 24
+        compress: true
 status:
     address: localhost:2114
