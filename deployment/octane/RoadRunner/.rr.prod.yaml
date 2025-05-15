@@ -25,11 +25,6 @@ metrics:
 logs:
   mode: production
   level: debug
-  channels:
-    http:
-      file_logger_options:
-        log_output: "/var/www/html/storage/logs/http.log"
-        max_age: 24
-        compress: true
+  output: [stdout]
 status:
     address: localhost:2114
