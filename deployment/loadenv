@@ -23,6 +23,10 @@ if [[ "${LOAD_ENV}" == "1" ]]; then
     sed -i "s/METABASE_API_KEY=/METABASE_API_KEY=$METABASE_API_KEY/g" .env
     sed -i "s/METABASE_BASE_API_URL=/METABASE_BASE_API_URL=$METABASE_BASE_API_URL/g" .env
 
+    # hmac variables
+    sed -i "s/BACKEND_SHARED_SECRET=/BACKEND_SHARED_SECRET=$BACKEND_SHARED_SECRET/g" .env
+    sed -i "s/TRUSTED_CLIENT_IPS=/TRUSTED_CLIENT_IPS=$TRUSTED_CLIENT_IPS/g" .env
+
     # base64 decode redis cert string and create a new file - redis.pem
     echo $REDIS_CERT_STRING | base64 -d > redis.pem
 
