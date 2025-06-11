@@ -143,6 +143,9 @@ if [[ "${LOAD_ENV}" == "1" ]]; then
     # bigquery project id
     sed -i "s/GOOGLE_BIGQUERY_PROJECT_ID=/GOOGLE_BIGQUERY_PROJECT_ID=$GOOGLE_BIGQUERY_PROJECT_ID/g" .env
 
+    # solutech lipa db
+    sed -i "s/LIPA_PRODUCTION_DB_DATABASE=/LIPA_PRODUCTION_DB_DATABASE=$LIPA_PRODUCTION_DB_DATABASE/g" .env
+    sed -i "s/LIPA_SANDBOX_DB_DATABASE=/LIPA_SANDBOX_DB_DATABASE=$LIPA_SANDBOX_DB_DATABASE/g" .env
 fi
 
 # execute
