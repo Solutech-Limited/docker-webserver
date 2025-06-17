@@ -9,7 +9,7 @@ test_redis_command=${TEST_REDIS_COMMAND:-"false"}
 echo "Container mode: $container_mode"
 
 initialStuff() {
-    # test redus command
+    # test redis command
     if [ ${test_redis_command} = "true" ]; then
         # run stunnel
         stunnel redis-client.conf;
