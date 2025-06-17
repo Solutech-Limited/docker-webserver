@@ -117,6 +117,7 @@ if [[ "${LOAD_ENV}" == "1" ]]; then
     # maps credentials
     sed -i "s/MAPS_API_KEY=/MAPS_API_KEY=$MAPS_API_KEY/g" .env
     sed -i "s/MAPS_URL=/MAPS_URL=$MAPS_URL/g" .env
+    sed -i "s/DISTANCE_MATRIX_URL=/DISTANCE_MATRIX_URL=$DISTANCE_MATRIX_URL/g" .env
     
     # jwt secret
     sed -i "s/JWT_SECRET=/JWT_SECRET=$JWT_SECRET/g" .env
