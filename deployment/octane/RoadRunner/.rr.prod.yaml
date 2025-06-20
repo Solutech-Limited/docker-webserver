@@ -23,11 +23,6 @@ http:
 metrics:
   address: "0.0.0.0:2112"
 logs:
-  mode: production
-  level: error
-  encoding: json
-  output:
-    - stdout
-    - http.log
+  output: [ stdout ]
 status:
     address: localhost:2114
